@@ -1,0 +1,90 @@
+:root {
+    --primary-green: #b4f12e;
+    --accent-green: #53F12E;
+    --accent-red: red;
+    --background-dark: #161617;
+    --accent-dark: #242524;
+    --text-dark: #161617;
+    --white: #FFFFFF;
+    /* --input-bg: #eee; */
+    --input-bg: #f6f6f6;
+    --input-border: #ccc;
+}
+
+/* Update your existing CSS to this: */
+@font-face {
+  font-family: "Nohemi";
+  src: url("~/assets/fonts/Nohemi-Bold-BF6438cc577b524.woff") format("woff");
+  font-weight: 700; /* BOLD */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Nohemi";
+  src: url("~/assets/fonts/Nohemi-Regular-BF6438cc579d934.woff") format("woff");
+  font-weight: 400; /* REGULAR */
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Nohemi";
+  src: url("~/assets/fonts/Nohemi-Thin-BF6438cc57e2011.woff") format("woff");
+  font-weight: 200; /* THIN */
+  font-style: normal;
+}
+
+h1 {
+  font-family: "Nohemi", sans-serif;
+  font-weight: 700;
+}
+h2{
+  font-family: "Nohemi", sans-serif;
+  font-weight: 700;
+}
+p {
+  font-family: "Nohemi", sans-serif;
+  font-weight: 400;
+}
+
+.subtitle {
+  font-family: "Nohemi", sans-serif;
+  font-size: small;
+  font-weight: 400;
+}
+
+body{
+    color: var(--text-dark);
+    margin: 20px;
+}
+
+button, a{
+    all: unset;
+    cursor: pointer;    
+}
+a{
+    font-family: "Nohemi", sans-serif;
+    font-weight: 400;
+}
+
+.secondary{
+    border: 1px, solid, var(--input-border);
+    width: fit-content;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border-radius: 5px;
+    font-family: "Nohemi", sans-serif;
+    font-weight: 400;
+}
+.primary{
+    background-color: var(--primary-green);
+    width: fit-content;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border-radius: 5px;
+    font-family: "Nohemi", sans-serif;
+    font-weight: 400;
+}

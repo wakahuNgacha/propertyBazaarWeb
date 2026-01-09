@@ -3,7 +3,9 @@
 </script>
 
 <template>
-
+    <AppHeader/>
+    <FirstComponent/>
+    <SecondComponent/>
 </template>
 
 <style scoped>
