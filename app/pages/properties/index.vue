@@ -3,71 +3,74 @@
 </script>
 
 <template>
-    <AppHeader/>
-    <div class="filters">
-        <div class="filter">
-            <div class="top">
-                <p>Location </p>                
+    <div class="full container">
+        <div class="filters">
+            <div class="filter">
+                <div class="top">
+                    <p>Location </p>                
+                </div>
+                <div class="bottom">
+                    <p class="subtitle">Town, Location</p>
+                </div>
             </div>
-            <div class="bottom">
-                <p class="subtitle">Town, Location</p>
+
+            <div class="filter">
+                <div class="top">
+                    <p>Price </p>                
+                </div>
+                <div class="bottom">
+                    <p class="subtitle">select</p>
+                </div>
             </div>
+
+            <div class="filter">
+                <div class="top">
+                    <p>Property Type</p>                
+                </div>
+                <div class="bottom">
+                    <p class="subtitle">select</p>
+                </div>
+            </div>
+
+            <div class="filter">
+                <div class="top">
+                    <p>Property Use</p>                
+                </div>
+                <div class="bottom">
+                    <p class="subtitle">select</p>
+                </div>
+            </div>
+
+            <div class="filter">
+                <div class="top">
+                    <p>Size</p>                
+                </div>
+                <div class="bottom">
+                    <p class="subtitle">select</p>
+                </div>
+            </div>
+
         </div>
 
-        <div class="filter">
-            <div class="top">
-                <p>Price </p>                
-            </div>
-            <div class="bottom">
-                <p class="subtitle">select</p>
-            </div>
+        <div class="sum_search">
+            <h2>Nairobi, Kilimani House 2 acres</h2>
+            <p>2000 Properties found</p>
+
         </div>
 
-        <div class="filter">
-            <div class="top">
-                <p>Property Type</p>                
+        <div class="property_row">
+            <div class="property_holder" v-for="i in 10">
+                <PropertyComponent/>            
             </div>
-            <div class="bottom">
-                <p class="subtitle">select</p>
-            </div>
-        </div>
 
-        <div class="filter">
-            <div class="top">
-                <p>Property Use</p>                
-            </div>
-            <div class="bottom">
-                <p class="subtitle">select</p>
-            </div>
-        </div>
-
-        <div class="filter">
-            <div class="top">
-                <p>Size</p>                
-            </div>
-            <div class="bottom">
-                <p class="subtitle">select</p>
-            </div>
-        </div>
-
+        </div>        
     </div>
-
-    <div class="sum_search">
-        <h2>Nairobi, Kilimani House 2 acres</h2>
-        <p>2000 Properties found</p>
-
-    </div>
-
-    <div class="property_row">
-        <div class="property_holder" v-for="i in 10">
-            <PropertyComponent/>            
-        </div>
-
-    </div>
-
 </template>
 
 <style scoped>
+    .container{ 
+        margin: 20px;
+    }
     .filters{
         display: flex;
         margin-top: 50px;
@@ -86,13 +89,13 @@
         width: 100%;
         /* background-color: aquamarine; */
         display: flex;
-        /* justify-content: center; */
-        /* align-items: center; */
         flex-wrap: wrap;
-        gap: 15px;
+        gap: 10px;
+        margin-right: 20px;
+        margin-right: 20px;
     }
     .property_holder{
-        flex: 0 0 calc(32.5%); 
+        flex: 0 0 calc(33.33% - 10px); 
         box-sizing: border-box;
     }
 </style>

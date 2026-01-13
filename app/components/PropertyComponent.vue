@@ -21,7 +21,7 @@
             </div>
 
             <div class="icon_holder location">
-                <img class="icon" src="" alt="">
+                <img class="icon" src="/location.png" alt="">
                 <p>County, town</p>
             </div>
         </div>

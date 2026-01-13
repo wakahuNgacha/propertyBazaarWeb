@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <div class="component_holder">
+    <div class="full">
         <h1>Featured Properties</h1>
         <p>We collaborate with the best agents and developers to help you get the best.</p>
 
@@ -19,14 +19,16 @@
 </template>
 
 <style scoped>
-    .component_holder{
-        width: 90%;
+    .full{
+        /* background-color: aquamarine; */
         margin-top: 100px;
-        padding: 40px;
-    }
+        /* padding: 40px; */
+        margin-right: 20px;
+        margin-left: 20px;}
     .property_row{
+        /* width: 100%; */
         display: flex;
-        gap: 15px;
+        gap: 10px;
         margin-bottom: 50px;
     }
     .property_holder{

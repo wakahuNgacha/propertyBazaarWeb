@@ -3,7 +3,7 @@
 </script>
 
 <template>
-    <div class="holder">
+    <div class="full holder">
         <div class="section">
             <NuxtLink to="/">
                 <h1>Property Bazaar</h1>                
@@ -11,9 +11,9 @@
         </div>
         <div class="section nav">
             <NuxtLink to="/properties">Home </NuxtLink>
-            <NuxtLink to="">Sell </NuxtLink>
+            <NuxtLink to="/sell">Sell </NuxtLink>
             <NuxtLink to="">Refer </NuxtLink> 
-            <NuxtLink to="">Blogs </NuxtLink>
+            <NuxtLink to="/blogs">Blogs </NuxtLink>
             <NuxtLink to="">About us </NuxtLink>
             <NuxtLink to="">Contact us</NuxtLink>                    
 
@@ -27,7 +27,7 @@
 </template>
 
 <style scoped>
-    .holder{
+    .full{
         display: flex;
         justify-content: space-around;
         align-items: center;
@@ -36,11 +36,7 @@
     .section{
         display: flex;
         width: fit-content;
-
-    }
-    .section *{
-        margin-left: 5px;
-        margin-right: 5px;
+        gap: 10px;
     }
     .nav a:hover {
         color: var(--primary-green);

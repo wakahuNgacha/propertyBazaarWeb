@@ -1,11 +1,13 @@
 <script setup>
-
+definePageMeta({
+})
 </script>
 
 <template>
-    <AppHeader/>
+    <!-- <AppHeader/> -->
     <FirstComponent/>
     <SecondComponent/>
+    <!-- <Contact/> -->
 </template>
 
 <style scoped>
