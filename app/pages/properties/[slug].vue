@@ -4,7 +4,6 @@
 </script>
 
 <template>
-    <AppHeader/>
     <div class="container">
         <div class="controllers">
             <div class="right">
@@ -111,7 +110,6 @@
         </div>
     </div>
 
-    <Contact/>
 </template>
 
 <style scoped>
