@@ -5,23 +5,20 @@
 <template>
     <div class="full holder">
         <div class="section">
-            <NuxtLink to="/">
+            <NuxtLink to="/agent">
                 <h1>Property Bazaar</h1>                
             </NuxtLink>
         </div>
         <div class="section nav">
-            <NuxtLink to="/properties">Home </NuxtLink>
-            <NuxtLink to="/sell">Sell </NuxtLink>
-            <NuxtLink to="/agent">Agent </NuxtLink>
-            <NuxtLink to="">Refer </NuxtLink> 
-            <NuxtLink to="/blogs">Blogs </NuxtLink>
-            <NuxtLink to="">About us </NuxtLink>
-            <NuxtLink to="">Contact us</NuxtLink>                    
-
+            <NuxtLink to="/agent/properties">Home </NuxtLink>
+            <NuxtLink to="/agent/add">Add</NuxtLink>
+            <NuxtLink to="/agent/refer">Refer </NuxtLink>
         </div>
         <div class="section">
-            <button class="secondary">Log in</button>
-            <button class="primary">Get Started</button>
+            <NuxtLink to="/agent/agent-profile">
+                <img class="icon" src="/avatar.png" alt="">                
+            </NuxtLink>
+
         </div>
     </div>
     <hr>

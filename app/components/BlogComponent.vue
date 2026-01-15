@@ -4,9 +4,9 @@
 
 <template>
     <div class="blog_card">
-        <div class="image">
+        <NuxtLink to="/blogs/my-blog-post" class="image">
             <img src="/pexels-heyho-7031607.jpg" alt="blog image">
-        </div>
+        </NuxtLink>
         <div class="content">
             <div class="content_top">
                 <p class="category">Market insights</p>
@@ -55,7 +55,7 @@
     }
     .category{
         background-color: var(--primary-green);
-        color: var(--white);
+        /* color: var(--white); */
         padding: 5px 10px;
         border-radius: 5px;
         font-size: 12px;
