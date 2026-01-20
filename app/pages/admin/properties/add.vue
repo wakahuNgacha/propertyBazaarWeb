@@ -2,13 +2,14 @@
 definePageMeta({
   layout: 'admin',
 })
+const { goBack } = usePreviousWindow()
 </script>
 
 <template>
   <div class="container">
     <div class="controllers">
       <div class="right">
-          <button class="secondary">
+          <button class="secondary" @click="goBack">
               <img class="icon" src="/back.png" alt="back">
               <p>Back</p>
           </button>
@@ -122,9 +123,9 @@ definePageMeta({
       gap: 10px;
   }
   .form{
-      border: 1px solid var(--input-border);
+      /* border: 1px solid var(--input-border); */
       border-radius: 10px;
-      padding: 40px;
+      /* padding: 40px; */
       /* background-color: aqua; */
   }
 

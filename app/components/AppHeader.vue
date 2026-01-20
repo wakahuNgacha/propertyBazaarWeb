@@ -21,7 +21,10 @@
         </div>
         <div class="section">
             <button class="secondary">Log in</button>
-            <button class="primary">Get Started</button>
+            <NuxtLink to="/getStarted">
+                <button class="primary">Get Started</button>                
+            </NuxtLink>
+
         </div>
     </div>
     <hr>

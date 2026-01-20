@@ -2,13 +2,14 @@
 definePageMeta({
   layout: 'admin',
 })
+const { goBack } = usePreviousWindow()
 </script>
 
 <template>
     <div class="container">
         <div class="controllers">
             <div class="right">
-                <button class="secondary">
+                <button class="secondary" @click="goBack">
                     <img class="icon" src="/back.png" alt="back">
                     <p>Back</p>
                 </button>

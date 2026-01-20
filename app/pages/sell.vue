@@ -16,14 +16,85 @@
                 </video>
             </div>
         </div>
+
         <div class="form">
             <h1>Sell Your Property</h1>
             <p>Get hundreds of Leads with our advanced marketing tools.</p>
-            <div class="form_holder">
-                <form action="">
-                    <input type="text">
-                </form>
-            </div>
+            <form>
+                <div class="form_group">
+                <div class="form_holder">
+                    <div class="form-icon">
+                    <img class="icon" src="/email.png" alt="property">
+                    </div>
+                    <div class="input">
+                    <label for="title">Property Title</label>            
+                    <input type="text" id="title" placeholder="Enter property title" />                 
+                    </div>
+                </div>
+                <div class="form_holder">
+                    <div class="form-icon">
+                    <img class="icon" src="/location.png" alt="location">
+                    </div>
+                    <div class="input">
+                    <label for="location">Location</label>
+                    <input type="text" id="location" placeholder="Enter property location" />            
+                    </div>
+                </div>          
+                </div>
+
+                <div class="form_group">
+                <div class="form_holder">
+                    <div class="form-icon">
+                    <img class="icon" src="/email.png" alt="price">
+                    </div>
+                    <div class="input">
+                    <label for="price">Price</label>            
+                    <input type="number" id="price" placeholder="Enter property price" />               
+                    </div>
+                </div>
+                </div>
+
+                <div class="form_group">
+                <div class="form_holder">
+                    <div class="form-icon">
+                    <img class="icon" src="/email.png" alt="type">
+                    </div>
+                    <div class="input">
+                    <label for="type">Property Type</label>            
+                    <input type="text" id="type" placeholder="Enter property type" />              
+                    </div>
+                </div>
+                </div>
+
+                <div class="form_group">
+                <div class="form_holder">
+                    <div class="form-icon">
+                    <img class="icon" src="/email.png" alt="use">
+                    </div>
+                    <div class="input">
+                    <label for="use">Property Use</label>            
+                    <input type="text" id="use" placeholder="Enter property use" />
+                    </div>
+                </div>
+                </div>
+
+                <div class="form_group">
+                <div class="form_holder">
+                    <div class="form-icon">
+                    <img class="icon" src="/ruler-triangle.png" alt="size">
+                    </div>
+                    <div class="input">
+                    <label for="size">Size (in sqft)</label>            
+                    <input type="number" id="size" placeholder="Enter property size" />              
+                    </div>
+                </div>
+                </div>
+                <div class="buttons">
+                <button class="primary" type="submit">Add Property</button>  
+                <button class="secondary">Cancel</button>        
+                </div>
+
+            </form>
         </div>
         
     </div>
@@ -91,6 +162,7 @@
     }
     .form{
         margin-top: 50px;
+        padding: 20px;
     }
     .second{
         margin-top: 10px;
