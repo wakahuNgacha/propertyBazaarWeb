@@ -22,7 +22,7 @@ definePageMeta({
         <div class="form_group">
           <div class="form_holder">
             <div class="form-icon">
-              <img class="icon" src="/email.png" alt="property">
+              <img class="icon" src="/house.png" alt="property">
             </div>
             <div class="input">
               <label for="title">Property Title</label>            
@@ -43,7 +43,7 @@ definePageMeta({
         <div class="form_group">
           <div class="form_holder">
             <div class="form-icon">
-              <img class="icon" src="/email.png" alt="price">
+              <img class="icon" src="/price-tag.png" alt="price">
             </div>
             <div class="input">
               <label for="price">Price</label>            

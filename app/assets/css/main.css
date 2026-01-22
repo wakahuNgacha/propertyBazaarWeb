@@ -135,12 +135,21 @@ input{
     outline: none;
     font-family: "Nohemi", sans-serif;
     font-weight: 400;
+    font-size: medium;
     background-color: transparent;
+    width: 90%;
+}
+select{
+    width: 90%;
+}
+textarea{
+
 }
 
 label{
     font-family: "Nohemi", sans-serif;
     font-weight: 400;
+    font-size: small;
 }
 
 select{

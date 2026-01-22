@@ -1,8 +1,7 @@
 <script setup>
+
 const config = useRuntimeConfig()
 
-const firstName = ref('')
-const lastName = ref('')
 const phone = ref('')
 const email = ref('')
 const password = ref('')
@@ -17,15 +16,12 @@ const submitForm = async () => {
 
   try {
     const payload = {
-      first_name: firstName.value,
-      last_name: lastName.value,
       phone: phone.value,
       email: email.value,
       password: password.value,
-      role: 'buyer',
     }
 
-    await $fetch(`${config.public.apiBase}/users/login/`, {
+    await $fetch(`${config.public.apiBase}/users/create/`, {
       method: 'POST',
       body: payload,
     })
@@ -43,30 +39,10 @@ const submitForm = async () => {
     <div class="container">
         <div class="left">
             <div class="form">
-                <h2>Get Started With Your Investment Journey</h2>
+                <h2>Welcome Back To Property Bazaar </h2>
                 <p>Browse thousands of properties all over the country</p>
                 
                 <form @submit.prevent="submitForm">
-                    <div class="form_group">
-                        <div class="form_holder">
-                            <div class="form-icon">
-                            <img class="icon" src="/avatar.png" alt="property">
-                            </div>
-                            <div class="input">
-                            <label for="firstName">First Name</label>            
-                            <input type="text" id="firstName" placeholder="Enter your first name" v-model="firstName" />                 
-                            </div>
-                        </div>
-                        <div class="form_holder">
-                            <div class="form-icon">
-                            <img class="icon" src="/avatar.png" alt="location">
-                            </div>
-                            <div class="input">
-                            <label for="lastName">Last Name</label>
-                            <input type="text" id="lastName" placeholder="Enter your Second name" v-model="lastName"/>            
-                            </div>
-                        </div>          
-                    </div>
 
                     <div class="form_group">
                         <div class="form_holder">
