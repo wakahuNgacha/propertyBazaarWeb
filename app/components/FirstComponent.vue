@@ -22,6 +22,7 @@
                 </div>
             </div>
         </div>
+        
         <div class="image">
             <img src="/pexels-pixabay-280229.jpg" alt="">
         </div>
@@ -70,9 +71,24 @@
         flex-direction: column;
         text-align: center;
         justify-content: center;
-        /* align-items: center; */
+        align-items: center;
         border-radius: 10px;
         z-index: 2;
+    }
+    .search_form{
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: center;
+        /* background-color: aquamarine; */
+    }
+
+    .buy{
+        /* background-color: rgb(0, 6, 4); */
+        width: 100%;
+        justify-content: start;
+        align-items: start;
     }
     .buy *{
         margin: 5px;
@@ -115,5 +131,4 @@
         height: 30px;
         margin: 10px;
     }
-
 </style>
