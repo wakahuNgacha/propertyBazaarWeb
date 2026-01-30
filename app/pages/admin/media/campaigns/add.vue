@@ -18,37 +18,80 @@ const { goBack } = usePreviousWindow()
       </div>
     </div>
     <div class="form">
-      <h2>Add New Content</h2>
+      <h2>Add New Campaign</h2>
       <form>
         <div class="form_group">
           <div class="form_holder">
             <div class="form-icon">
-              <img class="icon" src="/email.png" alt="property">
+              <img class="icon" src="/title.png" alt="property">
             </div>
             <div class="input">
-              <label for="title">Property Title</label>            
-              <input type="text" id="title" placeholder="Enter property title" />                 
+              <label for="name">Campaign Name</label>            
+              <input type="text" id="name" placeholder="Enter Campaign Name" />                 
             </div>
           </div>
           <div class="form_holder">
             <div class="form-icon">
-              <img class="icon" src="/location.png" alt="location">
+              <img class="icon" src="/goal.png" alt="location">
             </div>
             <div class="input">
-              <label for="location">Location</label>
-              <input type="text" id="location" placeholder="Enter property location" />            
+              <label for="objective">Objective</label>
+              <input type="text" id="objective" placeholder="Enter Campaign Objective" />            
             </div>
-          </div>          
+          </div>       
         </div>
 
         <div class="form_group">
           <div class="form_holder">
             <div class="form-icon">
-              <img class="icon" src="/email.png" alt="price">
+              <img class="icon" src="/status.png" alt="use">
             </div>
             <div class="input">
-              <label for="price">Price</label>            
-              <input type="number" id="price" placeholder="Enter property price" />               
+              <label for="status">Campaign Status</label>
+              <select id="status" v-model="status">
+                <option value="draft">Draft</option>
+                <option value="planned">Planned</option>
+                <option value="active">Active</option>
+                <option value="paused">Paused</option>
+                <option value="completed">Completed</option>
+                <option value="cancelled">Cancelled</option>
+              </select>                              
+            </div>
+          </div>
+          
+          <div class="form_holder">
+            <div class="form-icon">
+              <img class="icon" src="/construction.png" alt="use">
+            </div>
+            <div class="input">
+              <label for="type">Campaign Type</label>
+              <select id="type" v-model="type">
+                <option value="promotional">Promotional</option>
+                <option value="editorial">Editorial</option>
+              </select>                              
+            </div>
+          </div> 
+        </div>
+
+
+        <div class="form_group">
+          <div class="form_holder">
+            <div class="form-icon">
+              <img class="icon" src="/calendar.png" alt="type">
+            </div>
+            <div class="input">
+              <label for="start_date">Start Date</label>            
+              <input type="date" id="start_date" placeholder="Enter Start Date" />              
+            </div>
+          </div>
+
+          <div class="form_holder">
+            <div class="form-icon">
+              <img class="icon" src="/calendar.png" alt="type">
+            </div>
+            <div class="input">
+              <label for="end_date">End Date</label>            
+              <input type="date" id="end_date" placeholder="Enter End Date" />              
             </div>
           </div>
         </div>
@@ -56,11 +99,11 @@ const { goBack } = usePreviousWindow()
         <div class="form_group">
           <div class="form_holder">
             <div class="form-icon">
-              <img class="icon" src="/email.png" alt="type">
+              <img class="icon" src="/city.png" alt="use">
             </div>
             <div class="input">
-              <label for="type">Property Type</label>            
-              <input type="text" id="type" placeholder="Enter property type" />              
+              <label for="use">Related Property</label>            
+              <input type="number" id="use" placeholder="Enter Related Property" />
             </div>
           </div>
         </div>
@@ -68,28 +111,43 @@ const { goBack } = usePreviousWindow()
         <div class="form_group">
           <div class="form_holder">
             <div class="form-icon">
-              <img class="icon" src="/email.png" alt="use">
+              <img class="icon" src="/price-tag.png" alt="size">
             </div>
             <div class="input">
-              <label for="use">Property Use</label>            
-              <input type="text" id="use" placeholder="Enter property use" />
+              <label for="budget_estimate">Budget Estimate</label>            
+              <input type="number" id="budget_estimate" placeholder="Enter Budget Estimate" />              
             </div>
           </div>
         </div>
 
+        <h3>Documents</h3>
         <div class="form_group">
           <div class="form_holder">
             <div class="form-icon">
-              <img class="icon" src="/ruler-triangle.png" alt="size">
+              <img class="icon" src="/upload.png" alt="size">
             </div>
             <div class="input">
-              <label for="size">Size (in sqft)</label>            
-              <input type="number" id="size" placeholder="Enter property size" />              
+              <label for="document">Documents</label>            
+              <input type="file" id="document" placeholder="Enter Campaign Documents" />              
             </div>
           </div>
         </div>
+
+        <h3>Channels</h3>
+        <div class="form_group">
+          <div class="form_holder">
+            <div class="form-icon">
+              <img class="icon" src="/email.png" alt="size">
+            </div>
+            <div class="input">
+              <label for="channels">Channels</label>            
+              <input type="text" id="channels" placeholder="Enter Campaign Channels" />              
+            </div>
+          </div>         
+        </div>
+
         <div class="buttons">
-          <button class="primary" type="submit">Add Property</button>  
+          <button class="primary" type="submit">Add Campaign</button>  
           <button class="secondary">Cancel</button>        
         </div>
 
