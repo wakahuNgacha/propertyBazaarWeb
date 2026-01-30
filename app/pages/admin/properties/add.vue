@@ -253,7 +253,7 @@ const submitForm = async () => {
         <div class="form_group">
           <div class="form_holder">
             <div class="form-icon">
-              <img class="icon" src="/details.png" alt="use">
+              <img class="icon" src="/document.png" alt="use">
             </div>
             <div class="input">
               <label for="title_type">Title Type</label>       
@@ -266,7 +266,7 @@ const submitForm = async () => {
 
           <div class="form_holder">
             <div class="form-icon">
-              <img class="icon" src="/details.png" alt="use">
+              <img class="icon" src="/document.png" alt="use">
             </div>
             <div class="input">
               <label for="title_status">Title Status</label>       
@@ -352,7 +352,7 @@ const submitForm = async () => {
 
           <div class="form_holder">
             <div class="form-icon">
-              <img class="icon" src="/ruler-triangle.png" alt="use">
+              <img class="icon" src="/city.png" alt="use">
             </div>
             <div class="input">
               <label for="number_of_floors">Floors</label>
@@ -362,7 +362,7 @@ const submitForm = async () => {
           
           <div class="form_holder">
             <div class="form-icon">
-              <img class="icon" src="/ruler-triangle.png" alt="use">
+              <img class="icon" src="/bed.png" alt="use">
             </div>
             <div class="input">
               <label for="number_of_floors">Beds</label>
@@ -374,17 +374,27 @@ const submitForm = async () => {
         <div class="form_group">
           <div class="form_holder">
             <div class="form-icon">
-              <img class="icon" src="/ruler-triangle.png" alt="use">
+              <img class="icon" src="/bath.png" alt="use">
             </div>
             <div class="input">
               <label for="number_of_floors">Bathrooms</label>
               <input type="number" id="number_of_floors" placeholder="Number of Bathrooms" v-model="number_of_floors" />                 
             </div>
-          </div>  
+          </div>
 
           <div class="form_holder">
             <div class="form-icon">
-              <img class="icon" src="/ruler-triangle.png" alt="use">
+              <img class="icon" src="/car.png" alt="use">
+            </div>
+            <div class="input">
+              <label for="parking_spaces">Parking Space</label>
+              <input type="number" id="parking_spaces" placeholder="Parking Space" v-model="year_build" />                 
+            </div>
+          </div> 
+
+          <div class="form_holder">
+            <div class="form-icon">
+              <img class="icon" src="/calendar.png" alt="use">
             </div>
             <div class="input">
               <label for="year_build">Year Build</label>
@@ -394,7 +404,7 @@ const submitForm = async () => {
 
           <div class="form_holder">
             <div class="form-icon">
-              <img class="icon" src="/zoning.png" alt="use">
+              <img class="icon" src="/construction.png" alt="use">
             </div>
             <div class="input">
               <label for="construction_status">Construction Status</label>
@@ -412,7 +422,7 @@ const submitForm = async () => {
         <div class="form_group">
           <div class="form_holder">
             <div class="form-icon">
-              <img class="icon" src="/photos.png" alt="units">
+              <img class="icon" src="/city.png" alt="units">
             </div>
             <div class="input">
               <label>Total Units</label>
@@ -422,7 +432,7 @@ const submitForm = async () => {
 
           <div class="form_holder">
             <div class="form-icon">
-              <img class="icon" src="/photos.png" alt="ongoing">
+              <img class="icon" src="/construction1.png" alt="ongoing">
             </div>
             <div class="input">
               <label>Ongoing Units</label>
@@ -432,7 +442,7 @@ const submitForm = async () => {
 
           <div class="form_holder">
             <div class="form-icon">
-              <img class="icon" src="/photos.png" alt="available">
+              <img class="icon" src="/city.png" alt="available">
             </div>
             <div class="input">
               <label>Available Units</label>
@@ -505,6 +515,32 @@ const submitForm = async () => {
             <div class="input">
               <label for="title_status">Documents</label>
               <input type="file" name="documents" id="documents">
+            </div>
+          </div>
+        </div>
+
+        <h3>Amenities</h3>
+        <div class="form_group">
+          <div class="form_holder">
+            <div class="form-icon">
+              <img class="icon" src="/church.png" alt="price">
+            </div>
+            <div class="input">
+              <label for="amenities">Add Amenities</label>            
+              <input type="text" id="amenities" placeholder="Enter Amenities" v-model="price" />               
+            </div>
+          </div>
+        </div>
+
+        <h3>Features</h3>
+        <div class="form_group">
+          <div class="form_holder">
+            <div class="form-icon">
+              <img class="icon" src="/bath.png" alt="price">
+            </div>
+            <div class="input">
+              <label for="features">Add Features</label>            
+              <input type="text" id="features" placeholder="Enter Features" v-model="price" />               
             </div>
           </div>
         </div>

@@ -12,7 +12,7 @@
         <div class="section nav">
             <NuxtLink to="/admin">Home</NuxtLink>
             <NuxtLink to="/admin/properties">properties </NuxtLink>
-            <NuxtLink to="/admin/blogs">blogs </NuxtLink>
+            <NuxtLink to="/admin/media">media </NuxtLink>
             <NuxtLink to="/admin/clients">clients</NuxtLink>
             <NuxtLink to="/admin/agents">agents</NuxtLink>
             <NuxtLink to="/admin/team">team</NuxtLink>

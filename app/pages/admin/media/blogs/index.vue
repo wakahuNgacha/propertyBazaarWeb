@@ -14,6 +14,11 @@ definePageMeta({
         <NuxtLink to="/admin/blogs/add" class="primary">Add Blog</NuxtLink>
       </div>
     </div>
+    <div class="container blogs">
+        <div class="blog_holder" v-for="i in 6" :key="i">
+            <AdminBlogComponent/>
+        </div>
+    </div>  
   </div>
 </template>
 
@@ -40,5 +45,14 @@ definePageMeta({
     border-radius: 5px;
     padding-left: 10px;
     font-size: 16px;
+  }
+  .blogs{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+  }
+  .blog_holder{
+      flex: 0 0 calc(33.33% - 10px); 
+      box-sizing: border-box;
   }
 </style>

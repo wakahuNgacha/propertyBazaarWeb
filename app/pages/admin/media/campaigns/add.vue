@@ -18,7 +18,7 @@ const { goBack } = usePreviousWindow()
       </div>
     </div>
     <div class="form">
-      <h2>Add New Property</h2>
+      <h2>Add New Content</h2>
       <form>
         <div class="form_group">
           <div class="form_holder">
@@ -136,4 +136,3 @@ const { goBack } = usePreviousWindow()
       height: 100%;
   }
 </style>
-
