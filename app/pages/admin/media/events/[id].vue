@@ -22,20 +22,19 @@ const { goBack } = usePreviousWindow()
             <input type="text" placeholder="Search properties..." />            
           </div>
           <!-- <div class="add">
-            <NuxtLink to="/admin/media/campaigns/add" class="primary">Add Campaign</NuxtLink>
+            <NuxtLink to="/admin/media/events/add" class="primary">Add Events</NuxtLink>
           </div> -->
         </div>
 
-        <div class="sum_search">
+        <!-- <div class="sum_search">
             <h2>November week two marketing Campaign</h2>
             <p>Marketing week two</p>
-
-        </div>
+        </div> -->
 
         <div class="property_row">
-            <div class="property_holder" v-for="i in 10">
-                <ContentComponent/>            
-            </div>
+            <!-- <div class="property_holder" v-for="i in 10">
+                <EventComponent/>            
+            </div> -->
 
         </div>        
     </div>

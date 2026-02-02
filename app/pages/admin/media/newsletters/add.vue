@@ -18,45 +18,27 @@ const { goBack } = usePreviousWindow()
       </div>
     </div>
     <div class="form">
-      <h2>Add New Content</h2>
+      <h2>Add Newsletter</h2>
       <form>
         <div class="form_group">
           <div class="form_holder">
             <div class="form-icon">
-              <img class="icon" src="/status.png" alt="use">
+              <img class="icon" src="/title.png" alt="property">
             </div>
             <div class="input">
-              <label for="content_type">Content Type</label>
-              <select id="content_type" v-model="content_type">
-                <option value="blog">Blog</option>
-                <option value="video">Video</option>
-                <option value="infographic">Infographic</option>
-              </select>                              
+              <label for="name">Campaign Name</label>            
+              <input type="text" id="name" placeholder="Enter Campaign Name" />                 
             </div>
           </div>
-
           <div class="form_holder">
             <div class="form-icon">
-              <img class="icon" src="/title.png" alt="location">
+              <img class="icon" src="/goal.png" alt="location">
             </div>
             <div class="input">
-              <label for="title">title</label>
-              <input type="text" id="title" placeholder="Enter Content Title" />            
+              <label for="subject">Subject</label>
+              <input type="text" id="subject" placeholder="Enter Newsletter Subject" />            
             </div>
-          </div>          
-        </div>
-
-        <div class="form_group">
-
-          <div class="form_holder">
-            <div class="form-icon">
-              <img class="icon" src="/details.png" alt="price">
-            </div>
-            <div class="input">
-              <label for="summary">Summary</label>            
-              <input type="text" id="summary" placeholder="Enter Content Summary" />               
-            </div>
-          </div>
+          </div>       
         </div>
 
         <div class="form_group">
@@ -76,104 +58,96 @@ const { goBack } = usePreviousWindow()
               </select>                              
             </div>
           </div>
-
+          
           <div class="form_holder">
             <div class="form-icon">
-              <img class="icon" src="/status.png" alt="use">
+              <img class="icon" src="/construction.png" alt="use">
             </div>
             <div class="input">
-              <label for="featured">Features</label>
-              <select id="featured" v-model="featured">
-                <option value="true">Yes</option>
-                <option value="false">No</option>
+              <label for="type">Campaign Type</label>
+              <select id="type" v-model="type">
+                <option value="promotional">Promotional</option>
+                <option value="editorial">Editorial</option>
               </select>                              
             </div>
-          </div>     
+          </div> 
         </div>
 
-        <h3>Blogs</h3>
-        <div class="form_group">
-          <div class="form_holder">
-            <div class="form-icon">
-              <img class="icon" src="/details.png" alt="use">
-            </div>
-            <div class="input">
-              <label for="body">Body</label>
-              <textarea name="body" id="body" placeholder="Enter Blogs body"> </textarea>
-            </div>
-          </div>
-        </div>
 
         <div class="form_group">
           <div class="form_holder">
             <div class="form-icon">
-              <img class="icon" src="/writing.png" alt="size">
+              <img class="icon" src="/calendar.png" alt="type">
             </div>
             <div class="input">
-              <label for="author">Author</label>            
-              <input type="text" id="author" placeholder="Enter Author Name" />              
+              <label for="start_date">Start Date</label>            
+              <input type="date" id="start_date" placeholder="Enter Start Date" />              
             </div>
           </div>
 
           <div class="form_holder">
             <div class="form-icon">
-              <img class="icon" src="/clock.png" alt="size">
+              <img class="icon" src="/calendar.png" alt="type">
             </div>
             <div class="input">
-              <label for="reading_time">Reading Time</label>            
-              <input type="number" id="reading_time" placeholder="Enter Reading Time" />              
-            </div>
-          </div>
-        </div>
-
-        <h3>Video</h3>
-        <div class="form_group">
-          <div class="form_holder">
-            <div class="form-icon">
-              <img class="icon" src="/link.png" alt="size">
-            </div>
-            <div class="input">
-              <label for="video_url">Video URL</label>            
-              <input type="text" id="video_url" placeholder="Enter Video URL" />              
-            </div>
-          </div>
-
-          <div class="form_holder">
-            <div class="form-icon">
-              <img class="icon" src="/clock.png" alt="size">
-            </div>
-            <div class="input">
-              <label for="duration">Duration</label>            
-              <input type="number" id="duration" placeholder="Enter Duration" />              
+              <label for="end_date">End Date</label>            
+              <input type="date" id="end_date" placeholder="Enter End Date" />              
             </div>
           </div>
         </div>
 
-        <h3>Channel and Tags</h3>
         <div class="form_group">
           <div class="form_holder">
             <div class="form-icon">
-              <img class="icon" src="/tags.png" alt="size">
+              <img class="icon" src="/city.png" alt="use">
             </div>
             <div class="input">
-              <label for="content_tags">Content Tags</label>            
-              <input type="text" id="content_tags" placeholder="Enter Content Tags" />              
+              <label for="use">Related Property</label>            
+              <input type="number" id="use" placeholder="Enter Related Property" />
             </div>
           </div>
+        </div>
 
+        <div class="form_group">
           <div class="form_holder">
             <div class="form-icon">
-              <img class="icon" src="/whatsapp.png" alt="size">
+              <img class="icon" src="/price-tag.png" alt="size">
+            </div>
+            <div class="input">
+              <label for="budget_estimate">Budget Estimate</label>            
+              <input type="number" id="budget_estimate" placeholder="Enter Budget Estimate" />              
+            </div>
+          </div>
+        </div>
+
+        <h3>Documents</h3>
+        <div class="form_group">
+          <div class="form_holder">
+            <div class="form-icon">
+              <img class="icon" src="/upload.png" alt="size">
+            </div>
+            <div class="input">
+              <label for="document">Documents</label>            
+              <input type="file" id="document" placeholder="Enter Campaign Documents" />              
+            </div>
+          </div>
+        </div>
+
+        <h3>Channels</h3>
+        <div class="form_group">
+          <div class="form_holder">
+            <div class="form-icon">
+              <img class="icon" src="/email.png" alt="size">
             </div>
             <div class="input">
               <label for="channels">Channels</label>            
-              <input type="channels" id="channels" placeholder="Enter Channels" />              
+              <input type="text" id="channels" placeholder="Enter Campaign Channels" />              
             </div>
-          </div>
+          </div>         
         </div>
 
         <div class="buttons">
-          <button class="primary" type="submit">Add Property</button>  
+          <button class="primary" type="submit">Add Campaign</button>  
           <button class="secondary">Cancel</button>        
         </div>
 
@@ -220,4 +194,3 @@ const { goBack } = usePreviousWindow()
       height: 100%;
   }
 </style>
-
