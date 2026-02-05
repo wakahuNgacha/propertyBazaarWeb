@@ -20,8 +20,8 @@ const { goBack } = usePreviousWindow()
                     <p>Share</p>
                 </button>
                 <button class="secondary">
-                    <img class="icon" src="/heart.png" alt="save">
-                    <p>Save</p>
+                    <img class="icon" src="/trash.png" alt="save">
+                    <p>Delete</p>
                 </button>           
             </div>
 

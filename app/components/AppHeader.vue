@@ -20,7 +20,10 @@
 
         </div>
         <div class="section">
-            <button class="secondary">Log in</button>
+            <NuxtLink to="/logIn">
+                <button class="secondary">Log in</button>
+            </NuxtLink>
+
             <NuxtLink to="/getStarted">
                 <button class="primary">Get Started</button>                
             </NuxtLink>

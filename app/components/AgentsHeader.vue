@@ -10,8 +10,8 @@
             </NuxtLink>
         </div>
         <div class="section nav">
-            <NuxtLink to="/agent/properties">Home </NuxtLink>
-            <NuxtLink to="/agent/add">Add</NuxtLink>
+            <NuxtLink to="/agent">Home </NuxtLink>
+            <NuxtLink to="/agent/properties">Properties</NuxtLink>
             <NuxtLink to="/agent/refer">Refer </NuxtLink>
         </div>
         <div class="section">

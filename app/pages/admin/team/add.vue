@@ -18,78 +18,75 @@ const { goBack } = usePreviousWindow()
       </div>
     </div>
     <div class="form">
-      <h2>Add New Property</h2>
+      <h2>Add New Team Member</h2>
       <form>
         <div class="form_group">
           <div class="form_holder">
             <div class="form-icon">
-              <img class="icon" src="/email.png" alt="property">
+              <img class="icon" src="/title.png" alt="price">
             </div>
             <div class="input">
-              <label for="title">Property Title</label>            
-              <input type="text" id="title" placeholder="Enter property title" />                 
+              <label for="first_name">First Name</label>            
+              <input type="text" id="first_name" placeholder="Enter First Name" />               
+            </div>
+          </div>
+
+          <div class="form_holder">
+            <div class="form-icon">
+              <img class="icon" src="/title.png" alt="price">
+            </div>
+            <div class="input">
+              <label for="last_name">Last Name</label>            
+              <input type="text" id="last_name" placeholder="Enter Last Name" />               
+            </div>
+          </div>
+        </div>
+
+        <div class="form_group">
+          <div class="form_holder">
+            <div class="form-icon">
+              <img class="icon" src="/call.png" alt="location">
+            </div>
+            <div class="input">
+              <label for="phone">Phone</label>
+              <input type="phone" id="phone" placeholder="Enter Phone" />            
+            </div>
+          </div>
+          
+          <div class="form_holder">
+            <div class="form-icon">
+              <img class="icon" src="/email.png" alt="location">
+            </div>
+            <div class="input">
+              <label for="email">Email</label>
+              <input type="email" id="email" placeholder="Enter email" />            
+            </div>
+          </div>
+        </div>
+
+        <div class="form_group">
+          <div class="form_holder">
+            <div class="form-icon">
+              <img class="icon" src="/title.png" alt="property">
+            </div>
+            <div class="input">
+              <label for="position">Position</label>            
+              <input type="text" id="position" placeholder="Enter position" />                 
             </div>
           </div>
           <div class="form_holder">
             <div class="form-icon">
-              <img class="icon" src="/location.png" alt="location">
+              <img class="icon" src="/group.png" alt="location">
             </div>
             <div class="input">
-              <label for="location">Location</label>
-              <input type="text" id="location" placeholder="Enter property location" />            
+              <label for="department">Department</label>
+              <input type="text" id="department" placeholder="Enter Department" />            
             </div>
           </div>          
         </div>
 
-        <div class="form_group">
-          <div class="form_holder">
-            <div class="form-icon">
-              <img class="icon" src="/email.png" alt="price">
-            </div>
-            <div class="input">
-              <label for="price">Price</label>            
-              <input type="number" id="price" placeholder="Enter property price" />               
-            </div>
-          </div>
-        </div>
-
-        <div class="form_group">
-          <div class="form_holder">
-            <div class="form-icon">
-              <img class="icon" src="/email.png" alt="type">
-            </div>
-            <div class="input">
-              <label for="type">Property Type</label>            
-              <input type="text" id="type" placeholder="Enter property type" />              
-            </div>
-          </div>
-        </div>
-
-        <div class="form_group">
-          <div class="form_holder">
-            <div class="form-icon">
-              <img class="icon" src="/email.png" alt="use">
-            </div>
-            <div class="input">
-              <label for="use">Property Use</label>            
-              <input type="text" id="use" placeholder="Enter property use" />
-            </div>
-          </div>
-        </div>
-
-        <div class="form_group">
-          <div class="form_holder">
-            <div class="form-icon">
-              <img class="icon" src="/ruler-triangle.png" alt="size">
-            </div>
-            <div class="input">
-              <label for="size">Size (in sqft)</label>            
-              <input type="number" id="size" placeholder="Enter property size" />              
-            </div>
-          </div>
-        </div>
         <div class="buttons">
-          <button class="primary" type="submit">Add Property</button>  
+          <button class="primary" type="submit">Add Team Member</button>  
           <button class="secondary">Cancel</button>        
         </div>
 

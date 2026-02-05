@@ -24,7 +24,7 @@
                 <div class="form_group">
                 <div class="form_holder">
                     <div class="form-icon">
-                    <img class="icon" src="/email.png" alt="property">
+                    <img class="icon" src="/title.png" alt="property">
                     </div>
                     <div class="input">
                     <label for="title">Property Title</label>            
@@ -45,7 +45,7 @@
                 <div class="form_group">
                 <div class="form_holder">
                     <div class="form-icon">
-                    <img class="icon" src="/email.png" alt="price">
+                    <img class="icon" src="/price-tag.png" alt="price">
                     </div>
                     <div class="input">
                     <label for="price">Price</label>            
@@ -57,7 +57,7 @@
                 <div class="form_group">
                 <div class="form_holder">
                     <div class="form-icon">
-                    <img class="icon" src="/email.png" alt="type">
+                    <img class="icon" src="/city.png" alt="type">
                     </div>
                     <div class="input">
                     <label for="type">Property Type</label>            
@@ -69,7 +69,7 @@
                 <div class="form_group">
                 <div class="form_holder">
                     <div class="form-icon">
-                    <img class="icon" src="/email.png" alt="use">
+                    <img class="icon" src="/land-use.png" alt="use">
                     </div>
                     <div class="input">
                     <label for="use">Property Use</label>            

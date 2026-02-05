@@ -34,7 +34,7 @@ const { goBack } = usePreviousWindow()
 
         <div class="property_row">
             <div class="property_holder" v-for="i in 10">
-                <!-- <CampaignsComponents/>             -->
+                <TagComponent/>
             </div>
 
         </div>        
