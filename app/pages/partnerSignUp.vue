@@ -1,5 +1,41 @@
 <script setup>
+const config = useRuntimeConfig()
 
+const firstName = ref('')
+const secondName = ref('')
+const phone = ref('')
+const email = ref('')
+const password = ref('')
+
+const loading = ref(false)
+const error = ref('')
+
+const submitForm = async () => {
+  loading.value = true
+  error.value = ''
+
+  try {
+    const payload = {
+      first_name: firstName.value,
+      last_name: secondName.value,
+      phone: phone.value,
+      email: email.value,
+      password: password.value,
+      role: 'partner',
+    }
+
+    await $fetch(`${config.public.apiBase}/users/create/`, {
+      method: 'POST',
+      body: payload,
+    })
+
+    navigateTo('/properties')
+  } catch (err) {
+    error.value = JSON.stringify(err.data) || 'Something went wrong'
+  } finally {
+    loading.value = false
+  }
+}
 </script>
 
 <template>
@@ -9,15 +45,15 @@
                 <h2>Get your Real Estate Agent page</h2>
                 <p>Manage your properties better and have more leads with us</p>
                 
-                <form>
+                <form @submit.prevent="submitForm">
                     <div class="form_group">
                         <div class="form_holder">
                             <div class="form-icon">
                             <img class="icon" src="/avatar.png" alt="property">
                             </div>
                             <div class="input">
-                            <label for="title">First Name</label>            
-                            <input type="text" id="firstName" placeholder="Enter your first name" />                 
+                            <label for="firstName">First Name</label>            
+                            <input type="text" id="firstName" placeholder="Enter your first name" v-model="firstName" />                 
                             </div>
                         </div>
                         <div class="form_holder">
@@ -25,8 +61,8 @@
                             <img class="icon" src="/avatar.png" alt="location">
                             </div>
                             <div class="input">
-                            <label for="location">Second Name</label>
-                            <input type="text" id="secondName" placeholder="Enter your Second name" />            
+                            <label for="secondName">Second Name</label>
+                            <input type="text" id="secondName" placeholder="Enter your Second name" v-model="secondName" />            
                             </div>
                         </div>          
                     </div>
@@ -37,8 +73,8 @@
                             <img class="icon" src="/call.png" alt="price">
                             </div>
                             <div class="input">
-                            <label for="price">Phone</label>            
-                            <input type="number" id="phone" placeholder="your phone number" />               
+                            <label for="phone">Phone</label>            
+                            <input type="phone" id="phone" placeholder="your phone number" v-model="phone" />               
                             </div>
                         </div>
                     </div>
@@ -49,8 +85,8 @@
                             <img class="icon" src="/email.png" alt="type">
                             </div>
                             <div class="input">
-                            <label for="type">Email</label>            
-                            <input type="text" id="type" placeholder="youremail@gmail.com" />              
+                            <label for="email">Email</label>            
+                            <input type="email" id="email" placeholder="youremail@gmail.com" v-model="email" />              
                             </div>
                         </div>
                     </div>
@@ -61,8 +97,8 @@
                             <img class="icon" src="/lock.png" alt="use">
                             </div>
                             <div class="input">
-                            <label for="use">Password</label>            
-                            <input type="password" id="password" placeholder="Enter a 6 character password" />
+                            <label for="password">Password</label>            
+                            <input type="password" id="password" placeholder="Enter a 6 character password" v-model="password" />
                             </div>
                         </div>
                     </div>
@@ -70,7 +106,7 @@
 
                     <div class="buttons">
                         <button class="primary" type="submit">Be a partner</button>  
-                        <button class="secondary">Cancel</button>        
+                        <button class="secondary" type="button">Cancel</button>        
                     </div>
 
                 </form>

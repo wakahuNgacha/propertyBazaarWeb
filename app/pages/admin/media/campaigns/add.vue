@@ -1,8 +1,54 @@
 <script setup>
+const config = useRuntimeConfig()
+
 definePageMeta({
   layout: 'admin',
 })
 const { goBack } = usePreviousWindow()
+
+const name = ref('')
+const objective = ref('')
+const status = ref('')
+const type = ref('')
+const startDate = ref('')
+const endDate = ref('')
+const relatedProperty = ref('')
+const budgetEstimate = ref('')
+const document = ref(null)
+const channels = ref('')
+
+const loading = ref(false)
+const error = ref('')
+
+const submitForm = async () => {
+  loading.value = true
+  error.value = ''
+
+  try {
+    const payload = {
+      name: name.value,
+      objective: objective.value,
+      status: status.value,
+      type: type.value,
+      start_date: startDate.value,
+      end_date: endDate.value,
+      related_property: relatedProperty.value,
+      budget_estimate: budgetEstimate.value,
+      channels: channels.value,
+    }
+
+    await $fetch(`${config.public.apiBase}/campaigns/create/`, {
+      method: 'POST',
+      body: payload,
+    })
+
+    navigateTo('/admin/media/campaigns')
+  } catch (err) {
+    error.value = JSON.stringify(err.data) || 'Something went wrong'
+  } finally {
+    loading.value = false
+  }
+}
 </script>
 
 <template>
@@ -19,7 +65,7 @@ const { goBack } = usePreviousWindow()
     </div>
     <div class="form">
       <h2>Add New Campaign</h2>
-      <form>
+      <form @submit.prevent="submitForm">
         <div class="form_group">
           <div class="form_holder">
             <div class="form-icon">
@@ -27,7 +73,7 @@ const { goBack } = usePreviousWindow()
             </div>
             <div class="input">
               <label for="name">Campaign Name</label>            
-              <input type="text" id="name" placeholder="Enter Campaign Name" />                 
+              <input type="text" id="name" placeholder="Enter Campaign Name" v-model="name" />                 
             </div>
           </div>
           <div class="form_holder">
@@ -36,7 +82,7 @@ const { goBack } = usePreviousWindow()
             </div>
             <div class="input">
               <label for="objective">Objective</label>
-              <input type="text" id="objective" placeholder="Enter Campaign Objective" />            
+              <input type="text" id="objective" placeholder="Enter Campaign Objective" v-model="objective" />            
             </div>
           </div>       
         </div>
@@ -81,7 +127,7 @@ const { goBack } = usePreviousWindow()
             </div>
             <div class="input">
               <label for="start_date">Start Date</label>            
-              <input type="date" id="start_date" placeholder="Enter Start Date" />              
+              <input type="date" id="start_date" placeholder="Enter Start Date" v-model="startDate" />              
             </div>
           </div>
 
@@ -91,7 +137,7 @@ const { goBack } = usePreviousWindow()
             </div>
             <div class="input">
               <label for="end_date">End Date</label>            
-              <input type="date" id="end_date" placeholder="Enter End Date" />              
+              <input type="date" id="end_date" placeholder="Enter End Date" v-model="endDate" />              
             </div>
           </div>
         </div>
@@ -102,8 +148,8 @@ const { goBack } = usePreviousWindow()
               <img class="icon" src="/city.png" alt="use">
             </div>
             <div class="input">
-              <label for="use">Related Property</label>            
-              <input type="number" id="use" placeholder="Enter Related Property" />
+              <label for="relatedProperty">Related Property</label>            
+              <input type="number" id="relatedProperty" placeholder="Enter Related Property" v-model="relatedProperty" />
             </div>
           </div>
         </div>
@@ -115,7 +161,7 @@ const { goBack } = usePreviousWindow()
             </div>
             <div class="input">
               <label for="budget_estimate">Budget Estimate</label>            
-              <input type="number" id="budget_estimate" placeholder="Enter Budget Estimate" />              
+              <input type="number" id="budget_estimate" placeholder="Enter Budget Estimate" v-model="budgetEstimate" />              
             </div>
           </div>
         </div>
@@ -128,7 +174,7 @@ const { goBack } = usePreviousWindow()
             </div>
             <div class="input">
               <label for="document">Documents</label>            
-              <input type="file" id="document" placeholder="Enter Campaign Documents" />              
+              <input type="file" id="document" placeholder="Enter Campaign Documents" v-model="document" />              
             </div>
           </div>
         </div>
@@ -141,14 +187,14 @@ const { goBack } = usePreviousWindow()
             </div>
             <div class="input">
               <label for="channels">Channels</label>            
-              <input type="text" id="channels" placeholder="Enter Campaign Channels" />              
+              <input type="text" id="channels" placeholder="Enter Campaign Channels" v-model="channels" />              
             </div>
           </div>         
         </div>
 
         <div class="buttons">
           <button class="primary" type="submit">Add Campaign</button>  
-          <button class="secondary">Cancel</button>        
+          <button class="secondary" type="button">Cancel</button>        
         </div>
 
       </form>

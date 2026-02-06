@@ -1,4 +1,6 @@
 <script setup>
+const config = useRuntimeConfig()
+
 definePageMeta({
   layout: 'admin',
 })
@@ -7,14 +9,41 @@ const { goBack } = usePreviousWindow()
 const title_number = ref('')
 const title = ref('')
 const description = ref('')
+const address = ref('')
+const county = ref('')
+const town = ref('')
+const location_pin = ref('')
+const local_area = ref('')
 const property_type = ref('')
 const property_use = ref('')
 const property_mode = ref('')
-const price = ref()
-const negotiable = ref()
-const property_status = ref()
-const title_type = ref()
-const title_status = ref()
+const price = ref('')
+const negotiable = ref('')
+const property_status = ref('')
+const title_type = ref('')
+const title_status = ref('')
+const plot_size = ref('')
+const zoning_information = ref('')
+const soil_type = ref('')
+const topography = ref('')
+const build_up_area = ref('')
+const number_of_floors = ref('')
+const number_of_beds = ref('')
+const number_of_bathrooms = ref('')
+const parking_spaces = ref('')
+const year_build = ref('')
+const construction_status = ref('')
+const total_units = ref('')
+const ongoing_units = ref('')
+const available_units = ref('')
+const start_date = ref('')
+const expected_completion_date = ref('')
+const payment_plans_availability = ref(false)
+const images = ref(null)
+const videos = ref(null)
+const documents = ref(null)
+const amenities = ref('')
+const features = ref('')
 
 const loading = ref(false)
 const error = ref('')
@@ -28,6 +57,11 @@ const submitForm = async () => {
       title_number: title_number.value,
       title: title.value,
       description: description.value,
+      address: address.value,
+      county: county.value,
+      town: town.value,
+      location_pin: location_pin.value,
+      local_area: local_area.value,
       property_type: property_type.value,
       property_use: property_use.value,
       property_mode: property_mode.value,
@@ -35,7 +69,26 @@ const submitForm = async () => {
       negotiable: negotiable.value,
       property_status: property_status.value,
       title_type: title_type.value,
-      title_status: title_status.value
+      title_status: title_status.value,
+      plot_size: plot_size.value,
+      zoning_information: zoning_information.value,
+      soil_type: soil_type.value,
+      topography: topography.value,
+      build_up_area: build_up_area.value,
+      number_of_floors: number_of_floors.value,
+      number_of_beds: number_of_beds.value,
+      number_of_bathrooms: number_of_bathrooms.value,
+      parking_spaces: parking_spaces.value,
+      year_build: year_build.value,
+      construction_status: construction_status.value,
+      total_units: total_units.value,
+      ongoing_units: ongoing_units.value,
+      available_units: available_units.value,
+      start_date: start_date.value,
+      expected_completion_date: expected_completion_date.value,
+      payment_plans_availability: payment_plans_availability.value,
+      amenities: amenities.value,
+      features: features.value,
     }
 
     await $fetch(`${config.public.apiBase}/properties/create/`, {
@@ -67,7 +120,7 @@ const submitForm = async () => {
     </div>
     <div class="form">
       <h2>Add New Property</h2>
-      <form>
+      <form @submit.prevent="submitForm">
         <div class="form_group">
           <div class="form_holder">
             <div class="form-icon">
@@ -98,7 +151,7 @@ const submitForm = async () => {
               <img class="icon" src="/location.png" alt="location">
             </div>
             <div class="input">
-              <label for="location">Address</label>
+              <label for="address">Address</label>
               <input type="text" id="address" placeholder="Address" v-model="address"/>            
             </div>
           </div>
@@ -130,8 +183,8 @@ const submitForm = async () => {
               <img class="icon" src="/location.png" alt="location">
             </div>
             <div class="input">
-              <label for="town">Location Pin</label>
-              <input type="text" id="location_pin" placeholder="Enter the location pin" v-model="town"/>            
+              <label for="location_pin">Location Pin</label>
+              <input type="text" id="location_pin" placeholder="Enter the location pin" v-model="location_pin"/>            
             </div>
           </div>
 
@@ -141,7 +194,7 @@ const submitForm = async () => {
             </div>
             <div class="input">
               <label for="local_area">Local Area</label>
-              <input type="text" id="local_area" placeholder="Local Area" v-model="town"/>            
+              <input type="text" id="local_area" placeholder="Local Area" v-model="local_area"/>            
             </div>
           </div>
         </div>
@@ -181,8 +234,8 @@ const submitForm = async () => {
               <img class="icon" src="/property-use.png" alt="use">
             </div>
             <div class="input">
-              <label for="use">Property Use</label>            
-              <select id="property_type" v-model="property_type">
+              <label for="property_use">Property Use</label>            
+              <select id="property_use" v-model="property_use">
                 <option value="homes">Homes</option>
                 <option value="apartments">Apartments</option>
                 <option value="plots">Plots</option>
@@ -287,7 +340,7 @@ const submitForm = async () => {
               <img class="icon" src="/ruler-triangle.png" alt="use">
             </div>
             <div class="input">
-              <label for="title_status">Plot Size</label>
+              <label for="plot_size">Plot Size</label>
               <input type="number" id="plot_size" placeholder="Enter Plot Size" v-model="plot_size" />                 
             </div>
           </div>
@@ -365,8 +418,8 @@ const submitForm = async () => {
               <img class="icon" src="/bed.png" alt="use">
             </div>
             <div class="input">
-              <label for="number_of_floors">Beds</label>
-              <input type="number" id="number_of_floors" placeholder="Number of Beds" v-model="number_of_floors" />                 
+              <label for="number_of_beds">Beds</label>
+              <input type="number" id="number_of_beds" placeholder="Number of Beds" v-model="number_of_beds" />                 
             </div>
           </div>
         </div>
@@ -377,8 +430,8 @@ const submitForm = async () => {
               <img class="icon" src="/bath.png" alt="use">
             </div>
             <div class="input">
-              <label for="number_of_floors">Bathrooms</label>
-              <input type="number" id="number_of_floors" placeholder="Number of Bathrooms" v-model="number_of_floors" />                 
+              <label for="number_of_bathrooms">Bathrooms</label>
+              <input type="number" id="number_of_bathrooms" placeholder="Number of Bathrooms" v-model="number_of_bathrooms" />                 
             </div>
           </div>
 
@@ -388,7 +441,7 @@ const submitForm = async () => {
             </div>
             <div class="input">
               <label for="parking_spaces">Parking Space</label>
-              <input type="number" id="parking_spaces" placeholder="Parking Space" v-model="year_build" />                 
+              <input type="number" id="parking_spaces" placeholder="Parking Space" v-model="parking_spaces" />                 
             </div>
           </div> 
 
@@ -425,8 +478,8 @@ const submitForm = async () => {
               <img class="icon" src="/city.png" alt="units">
             </div>
             <div class="input">
-              <label>Total Units</label>
-              <input type="number" name="total_units" required>
+              <label for="total_units">Total Units</label>
+              <input type="number" id="total_units" placeholder="" v-model="total_units" required>
             </div>
           </div>
 
@@ -435,8 +488,8 @@ const submitForm = async () => {
               <img class="icon" src="/construction1.png" alt="ongoing">
             </div>
             <div class="input">
-              <label>Ongoing Units</label>
-              <input type="number" name="ongoing_units" value="0">
+              <label for="ongoing_units">Ongoing Units</label>
+              <input type="number" id="ongoing_units" placeholder="" v-model="ongoing_units" value="0">
             </div>
           </div>
 
@@ -445,8 +498,8 @@ const submitForm = async () => {
               <img class="icon" src="/city.png" alt="available">
             </div>
             <div class="input">
-              <label>Available Units</label>
-              <input type="number" name="available_units" value="0">
+              <label for="available_units">Available Units</label>
+              <input type="number" id="available_units" placeholder="" v-model="available_units" value="0">
             </div>
           </div>
         </div>
@@ -457,8 +510,8 @@ const submitForm = async () => {
               <img class="icon" src="/calendar.png" alt="start date">
             </div>
             <div class="input">
-              <label>Start Date</label>
-              <input type="date" name="start_date" required>
+              <label for="start_date">Start Date</label>
+              <input type="date" id="start_date" placeholder="" v-model="start_date" required>
             </div>
           </div>
 
@@ -467,8 +520,8 @@ const submitForm = async () => {
               <img class="icon" src="/calendar.png" alt="expected completion">
             </div>
             <div class="input">
-              <label>Expected Completion Date</label>
-              <input type="date" name="expected_completion_date" required>
+              <label for="expected_completion_date">Expected Completion Date</label>
+              <input type="date" id="expected_completion_date" placeholder="" v-model="expected_completion_date" required>
             </div>
           </div>
 
@@ -478,7 +531,7 @@ const submitForm = async () => {
             </div>
             <div class="input checkbox">
               <label>
-                <input type="checkbox" name="payment_plans_availability">
+                <input type="checkbox" id="payment_plans_availability" v-model="payment_plans_availability">
                 Payment Plans Available
               </label>
             </div>
@@ -490,31 +543,31 @@ const submitForm = async () => {
         <div class="form_group">
           <div class="form_holder">
             <div class="form-icon">
-              <img class="icon" src="/photos.png" alt="use">
+              <img class="icon" src="/photos.png" alt="images">
             </div>
             <div class="input">
-              <label for="title_status">Images</label>
-              <input type="file" name="images" id="images">
+              <label for="images">Images</label>
+              <input type="file" id="images" multiple @change="images = $event.target.files">
             </div>
           </div>
           
           <div class="form_holder">
             <div class="form-icon">
-              <img class="icon" src="/video.png" alt="use">
+              <img class="icon" src="/video.png" alt="videos">
             </div>
             <div class="input">
-              <label for="title_status">Video</label>
-              <input type="file" name="videos" id="videos">
+              <label for="videos">Videos</label>
+              <input type="file" id="videos" multiple @change="videos = $event.target.files">
             </div>
           </div>
 
           <div class="form_holder">
             <div class="form-icon">
-              <img class="icon" src="/document.png" alt="use">
+              <img class="icon" src="/document.png" alt="documents">
             </div>
             <div class="input">
-              <label for="title_status">Documents</label>
-              <input type="file" name="documents" id="documents">
+              <label for="documents">Documents</label>
+              <input type="file" id="documents" @change="documents = $event.target.files">
             </div>
           </div>
         </div>
@@ -523,11 +576,11 @@ const submitForm = async () => {
         <div class="form_group">
           <div class="form_holder">
             <div class="form-icon">
-              <img class="icon" src="/church.png" alt="price">
+              <img class="icon" src="/church.png" alt="amenities">
             </div>
             <div class="input">
               <label for="amenities">Add Amenities</label>            
-              <input type="text" id="amenities" placeholder="Enter Amenities" v-model="price" />               
+              <input type="text" id="amenities" placeholder="Enter Amenities" v-model="amenities" />               
             </div>
           </div>
         </div>
@@ -536,18 +589,18 @@ const submitForm = async () => {
         <div class="form_group">
           <div class="form_holder">
             <div class="form-icon">
-              <img class="icon" src="/bath.png" alt="price">
+              <img class="icon" src="/bath.png" alt="features">
             </div>
             <div class="input">
               <label for="features">Add Features</label>            
-              <input type="text" id="features" placeholder="Enter Features" v-model="price" />               
+              <input type="text" id="features" placeholder="Enter Features" v-model="features" />               
             </div>
           </div>
         </div>
 
         <div class="buttons">
           <button class="primary" type="submit">Add Property</button>  
-          <button class="secondary">Cancel</button>        
+          <button class="secondary" type="button">Cancel</button>        
         </div>
 
       </form>

@@ -1,5 +1,42 @@
 <script setup>
+const config = useRuntimeConfig()
 
+const title = ref('')
+const location = ref('')
+const price = ref('')
+const type = ref('')
+const use = ref('')
+const size = ref('')
+
+const loading = ref(false)
+const error = ref('')
+
+const submitForm = async () => {
+  loading.value = true
+  error.value = ''
+
+  try {
+    const payload = {
+      title: title.value,
+      location: location.value,
+      price: price.value,
+      type: type.value,
+      use: use.value,
+      size: size.value,
+    }
+
+    await $fetch(`${config.public.apiBase}/properties/create/`, {
+      method: 'POST',
+      body: payload,
+    })
+
+    navigateTo('/properties')
+  } catch (err) {
+    error.value = JSON.stringify(err.data) || 'Something went wrong'
+  } finally {
+    loading.value = false
+  }
+}
 </script>
 
 <template>
@@ -20,7 +57,7 @@
         <div class="form">
             <h1>Sell Your Property</h1>
             <p>Get hundreds of Leads with our advanced marketing tools.</p>
-            <form>
+            <form @submit.prevent="submitForm">
                 <div class="form_group">
                 <div class="form_holder">
                     <div class="form-icon">
@@ -28,7 +65,7 @@
                     </div>
                     <div class="input">
                     <label for="title">Property Title</label>            
-                    <input type="text" id="title" placeholder="Enter property title" />                 
+                    <input type="text" id="title" placeholder="Enter property title" v-model="title" />                 
                     </div>
                 </div>
                 <div class="form_holder">
@@ -37,7 +74,7 @@
                     </div>
                     <div class="input">
                     <label for="location">Location</label>
-                    <input type="text" id="location" placeholder="Enter property location" />            
+                    <input type="text" id="location" placeholder="Enter property location" v-model="location" />            
                     </div>
                 </div>          
                 </div>
@@ -49,7 +86,7 @@
                     </div>
                     <div class="input">
                     <label for="price">Price</label>            
-                    <input type="number" id="price" placeholder="Enter property price" />               
+                    <input type="number" id="price" placeholder="Enter property price" v-model="price" />               
                     </div>
                 </div>
                 </div>
@@ -61,7 +98,7 @@
                     </div>
                     <div class="input">
                     <label for="type">Property Type</label>            
-                    <input type="text" id="type" placeholder="Enter property type" />              
+                    <input type="text" id="type" placeholder="Enter property type" v-model="type" />              
                     </div>
                 </div>
                 </div>
@@ -73,7 +110,7 @@
                     </div>
                     <div class="input">
                     <label for="use">Property Use</label>            
-                    <input type="text" id="use" placeholder="Enter property use" />
+                    <input type="text" id="use" placeholder="Enter property use" v-model="use" />
                     </div>
                 </div>
                 </div>
@@ -85,13 +122,13 @@
                     </div>
                     <div class="input">
                     <label for="size">Size (in sqft)</label>            
-                    <input type="number" id="size" placeholder="Enter property size" />              
+                    <input type="number" id="size" placeholder="Enter property size" v-model="size" />              
                     </div>
                 </div>
                 </div>
                 <div class="buttons">
                 <button class="primary" type="submit">Add Property</button>  
-                <button class="secondary">Cancel</button>        
+                <button class="secondary" type="button">Cancel</button>        
                 </div>
 
             </form>

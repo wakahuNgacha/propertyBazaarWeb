@@ -1,8 +1,47 @@
 <script setup>
+const config = useRuntimeConfig()
+
 definePageMeta({
   layout: 'admin',
 })
 const { goBack } = usePreviousWindow()
+
+const firstName = ref('')
+const lastName = ref('')
+const phone = ref('')
+const email = ref('')
+const position = ref('')
+const department = ref('')
+
+const loading = ref(false)
+const error = ref('')
+
+const submitForm = async () => {
+  loading.value = true
+  error.value = ''
+
+  try {
+    const payload = {
+      first_name: firstName.value,
+      last_name: lastName.value,
+      phone: phone.value,
+      email: email.value,
+      position: position.value,
+      department: department.value,
+    }
+
+    await $fetch(`${config.public.apiBase}/team/create/`, {
+      method: 'POST',
+      body: payload,
+    })
+
+    navigateTo('/admin/team')
+  } catch (err) {
+    error.value = JSON.stringify(err.data) || 'Something went wrong'
+  } finally {
+    loading.value = false
+  }
+}
 </script>
 
 <template>
@@ -19,7 +58,7 @@ const { goBack } = usePreviousWindow()
     </div>
     <div class="form">
       <h2>Add New Team Member</h2>
-      <form>
+      <form @submit.prevent="submitForm">
         <div class="form_group">
           <div class="form_holder">
             <div class="form-icon">
@@ -27,7 +66,7 @@ const { goBack } = usePreviousWindow()
             </div>
             <div class="input">
               <label for="first_name">First Name</label>            
-              <input type="text" id="first_name" placeholder="Enter First Name" />               
+              <input type="text" id="first_name" placeholder="Enter First Name" v-model="firstName" />               
             </div>
           </div>
 
@@ -37,7 +76,7 @@ const { goBack } = usePreviousWindow()
             </div>
             <div class="input">
               <label for="last_name">Last Name</label>            
-              <input type="text" id="last_name" placeholder="Enter Last Name" />               
+              <input type="text" id="last_name" placeholder="Enter Last Name" v-model="lastName" />               
             </div>
           </div>
         </div>
@@ -49,7 +88,7 @@ const { goBack } = usePreviousWindow()
             </div>
             <div class="input">
               <label for="phone">Phone</label>
-              <input type="phone" id="phone" placeholder="Enter Phone" />            
+              <input type="phone" id="phone" placeholder="Enter Phone" v-model="phone" />            
             </div>
           </div>
           
@@ -59,7 +98,7 @@ const { goBack } = usePreviousWindow()
             </div>
             <div class="input">
               <label for="email">Email</label>
-              <input type="email" id="email" placeholder="Enter email" />            
+              <input type="email" id="email" placeholder="Enter email" v-model="email" />            
             </div>
           </div>
         </div>
@@ -71,7 +110,7 @@ const { goBack } = usePreviousWindow()
             </div>
             <div class="input">
               <label for="position">Position</label>            
-              <input type="text" id="position" placeholder="Enter position" />                 
+              <input type="text" id="position" placeholder="Enter position" v-model="position" />                 
             </div>
           </div>
           <div class="form_holder">
@@ -80,14 +119,14 @@ const { goBack } = usePreviousWindow()
             </div>
             <div class="input">
               <label for="department">Department</label>
-              <input type="text" id="department" placeholder="Enter Department" />            
+              <input type="text" id="department" placeholder="Enter Department" v-model="department" />            
             </div>
           </div>          
         </div>
 
         <div class="buttons">
           <button class="primary" type="submit">Add Team Member</button>  
-          <button class="secondary">Cancel</button>        
+          <button class="secondary" type="button">Cancel</button>        
         </div>
 
       </form>

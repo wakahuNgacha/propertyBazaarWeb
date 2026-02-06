@@ -1,8 +1,39 @@
 <script setup>
+const config = useRuntimeConfig()
+
 definePageMeta({
   layout: 'admin',
 })
 const { goBack } = usePreviousWindow()
+
+const name = ref('')
+const description = ref('')
+
+const loading = ref(false)
+const error = ref('')
+
+const submitForm = async () => {
+  loading.value = true
+  error.value = ''
+
+  try {
+    const payload = {
+      name: name.value,
+      description: description.value,
+    }
+
+    await $fetch(`${config.public.apiBase}/tags/create/`, {
+      method: 'POST',
+      body: payload,
+    })
+
+    navigateTo('/admin/media/tags')
+  } catch (err) {
+    error.value = JSON.stringify(err.data) || 'Something went wrong'
+  } finally {
+    loading.value = false
+  }
+}
 </script>
 
 <template>
@@ -19,7 +50,7 @@ const { goBack } = usePreviousWindow()
     </div>
     <div class="form">
       <h2>Add New Tag</h2>
-      <form>
+      <form @submit.prevent="submitForm">
         <div class="form_group">
           <div class="form_holder">
             <div class="form-icon">
@@ -27,7 +58,7 @@ const { goBack } = usePreviousWindow()
             </div>
             <div class="input">
               <label for="name"> Name</label>            
-              <input type="text" id="name" placeholder="Enter Campaign Name" />                 
+              <input type="text" id="name" placeholder="Enter Campaign Name" v-model="name" />                 
             </div>
           </div>
           <div class="form_holder">
@@ -36,14 +67,14 @@ const { goBack } = usePreviousWindow()
             </div>
             <div class="input">
               <label for="description">Description</label>
-              <input type="text" id="description" placeholder="Enter Tags Description" />            
+              <input type="text" id="description" placeholder="Enter Tags Description" v-model="description" />            
             </div>
           </div>       
         </div>
 
         <div class="buttons">
           <button class="primary" type="submit">Add Campaign</button>  
-          <button class="secondary">Cancel</button>        
+          <button class="secondary" type="button">Cancel</button>        
         </div>
 
       </form>

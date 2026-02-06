@@ -1,8 +1,62 @@
 <script setup>
+const config = useRuntimeConfig()
+
 definePageMeta({
   layout: 'admin',
 })
 const { goBack } = usePreviousWindow()
+
+const firstName = ref('')
+const lastName = ref('')
+const phone = ref('')
+const email = ref('')
+const licenseNumber = ref('')
+const brokerType = ref('')
+const yearsOfExperience = ref('')
+const areaOfExpertise = ref('')
+const primaryLocation = ref('')
+const serviceArea = ref('')
+const relationshipStatus = ref('')
+const verified = ref('')
+const identityCard = ref(null)
+const kraPin = ref(null)
+const agreementDocument = ref(null)
+
+const loading = ref(false)
+const error = ref('')
+
+const submitForm = async () => {
+  loading.value = true
+  error.value = ''
+
+  try {
+    const payload = {
+      first_name: firstName.value,
+      last_name: lastName.value,
+      phone: phone.value,
+      email: email.value,
+      license_number: licenseNumber.value,
+      broker_type: brokerType.value,
+      years_of_experience: yearsOfExperience.value,
+      area_of_expertise: areaOfExpertise.value,
+      primary_location: primaryLocation.value,
+      service_area: serviceArea.value,
+      relationship_status: relationshipStatus.value,
+      verified: verified.value,
+    }
+
+    await $fetch(`${config.public.apiBase}/brokers/create/`, {
+      method: 'POST',
+      body: payload,
+    })
+
+    navigateTo('/admin/agents')
+  } catch (err) {
+    error.value = JSON.stringify(err.data) || 'Something went wrong'
+  } finally {
+    loading.value = false
+  }
+}
 </script>
 
 <template>
@@ -19,7 +73,7 @@ const { goBack } = usePreviousWindow()
     </div>
     <div class="form">
       <h2>Add New Broker</h2>
-      <form>
+      <form @submit.prevent="submitForm">
         <div class="form_group">
           <div class="form_holder">
             <div class="form-icon">
@@ -27,7 +81,7 @@ const { goBack } = usePreviousWindow()
             </div>
             <div class="input">
               <label for="first_name">First Name</label>            
-              <input type="text" id="first_name" placeholder="Enter First Name" />               
+              <input type="text" id="first_name" placeholder="Enter First Name" v-model="firstName" />               
             </div>
           </div>
 
@@ -37,7 +91,7 @@ const { goBack } = usePreviousWindow()
             </div>
             <div class="input">
               <label for="last_name">Last Name</label>            
-              <input type="text" id="last_name" placeholder="Enter Last Name" />               
+              <input type="text" id="last_name" placeholder="Enter Last Name" v-model="lastName" />               
             </div>
           </div>
         </div>
@@ -49,7 +103,7 @@ const { goBack } = usePreviousWindow()
             </div>
             <div class="input">
               <label for="phone">Phone</label>
-              <input type="phone" id="phone" placeholder="Enter Phone" />            
+              <input type="phone" id="phone" placeholder="Enter Phone" v-model="phone" />            
             </div>
           </div>
           
@@ -59,7 +113,7 @@ const { goBack } = usePreviousWindow()
             </div>
             <div class="input">
               <label for="email">Email</label>
-              <input type="email" id="email" placeholder="Enter email" />            
+              <input type="email" id="email" placeholder="Enter email" v-model="email" />            
             </div>
           </div>
         </div>
@@ -72,7 +126,7 @@ const { goBack } = usePreviousWindow()
             </div>
             <div class="input">
               <label for="license_number">License Number</label>            
-              <input type="text" id="license_number" placeholder="Enter License Number" />                 
+              <input type="text" id="license_number" placeholder="Enter License Number" v-model="licenseNumber" />                 
             </div>
           </div>
 
@@ -82,7 +136,7 @@ const { goBack } = usePreviousWindow()
             </div>
             <div class="input">
               <label for="broker_type">Broker Type</label>
-              <select id="broker_type" v-model="broker_type">
+              <select id="broker_type" v-model="brokerType">
                 <option value="homes">Homes</option>
                 <option value="apartments">Apartments</option>
                 <option value="plots">Plots</option>
@@ -99,7 +153,7 @@ const { goBack } = usePreviousWindow()
             </div>
             <div class="input">
               <label for="years_of_experience">Years of Experience</label>            
-              <input type="number" id="type" placeholder="Enter Years of Experience" />              
+              <input type="number" id="years_of_experience" placeholder="Enter Years of Experience" v-model="yearsOfExperience" />              
             </div>
           </div>
 
@@ -109,7 +163,7 @@ const { goBack } = usePreviousWindow()
             </div>
             <div class="input">
               <label for="area_of_expertise">Area of Expertise</label>
-              <select id="area_of_expertise" v-model="area_of_expertise">
+              <select id="area_of_expertise" v-model="areaOfExpertise">
                 <option value="homes">Homes</option>
                 <option value="apartments">Apartments</option>
                 <option value="plots">Plots</option>
@@ -126,7 +180,7 @@ const { goBack } = usePreviousWindow()
             </div>
             <div class="input">
               <label for="primary_location">Primary Location</label>            
-              <input type="text" id="primary_location" placeholder="Enter Primary Location" />
+              <input type="text" id="primary_location" placeholder="Enter Primary Location" v-model="primaryLocation" />
             </div>
           </div>
 
@@ -136,7 +190,7 @@ const { goBack } = usePreviousWindow()
             </div>
             <div class="input">
               <label for="service_area">Service Area</label>            
-              <input type="text" id="service_area" placeholder="Enter Service Area" />
+              <input type="text" id="service_area" placeholder="Enter Service Area" v-model="serviceArea" />
             </div>
           </div>      
         </div>
@@ -148,7 +202,7 @@ const { goBack } = usePreviousWindow()
             </div>
             <div class="input">
               <label for="relationship_status">Relationship Status </label>            
-              <input type="text" id="relationship_status" placeholder="Enter Relationship Status" />
+              <input type="text" id="relationship_status" placeholder="Enter Relationship Status" v-model="relationshipStatus" />
             </div>
           </div>
 
@@ -173,8 +227,8 @@ const { goBack } = usePreviousWindow()
               <img class="icon" src="/upload.png" alt="use">
             </div>
             <div class="input">
-              <label for="relationship_status">Identity Card </label>            
-              <input type="file" id="identity_card" placeholder="Upload Identity Card" />
+              <label for="identity_card">Identity Card </label>            
+              <input type="file" id="identity_card" placeholder="Upload Identity Card" v-model="identityCard" />
             </div>
           </div>
 
@@ -184,7 +238,7 @@ const { goBack } = usePreviousWindow()
             </div>
             <div class="input">
               <label for="kra_pin">Kra Pin </label>            
-              <input type="file" id="kra_pin" placeholder="Upload Kra Pin" />
+              <input type="file" id="kra_pin" placeholder="Upload Kra Pin" v-model="kraPin" />
             </div>
           </div>
 
@@ -194,7 +248,7 @@ const { goBack } = usePreviousWindow()
             </div>
             <div class="input">
               <label for="agreement_document">Agreement Document</label>            
-              <input type="file" id="agreement_document" placeholder="Upload Agreement Document" />
+              <input type="file" id="agreement_document" placeholder="Upload Agreement Document" v-model="agreementDocument" />
             </div>
           </div>
         </div>
@@ -202,7 +256,7 @@ const { goBack } = usePreviousWindow()
 
         <div class="buttons">
           <button class="primary" type="submit">Add Broker</button>  
-          <button class="secondary">Cancel</button>        
+          <button class="secondary" type="button">Cancel</button>        
         </div>
 
       </form>
