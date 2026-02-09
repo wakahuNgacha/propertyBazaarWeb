@@ -228,7 +228,7 @@ const submitForm = async () => {
             </div>
             <div class="input">
               <label for="identity_card">Identity Card </label>            
-              <input type="file" id="identity_card" placeholder="Upload Identity Card" v-model="identityCard" />
+              <input type="file" id="identity_card" placeholder="Upload Identity Card" />
             </div>
           </div>
 
@@ -238,7 +238,7 @@ const submitForm = async () => {
             </div>
             <div class="input">
               <label for="kra_pin">Kra Pin </label>            
-              <input type="file" id="kra_pin" placeholder="Upload Kra Pin" v-model="kraPin" />
+              <input type="file" id="kra_pin" placeholder="Upload Kra Pin" />
             </div>
           </div>
 
@@ -248,7 +248,7 @@ const submitForm = async () => {
             </div>
             <div class="input">
               <label for="agreement_document">Agreement Document</label>            
-              <input type="file" id="agreement_document" placeholder="Upload Agreement Document" v-model="agreementDocument" />
+              <input type="file" id="agreement_document" placeholder="Upload Agreement Document" />
             </div>
           </div>
         </div>

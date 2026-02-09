@@ -174,7 +174,7 @@ const submitForm = async () => {
             </div>
             <div class="input">
               <label for="document">Documents</label>            
-              <input type="file" id="document" placeholder="Enter Campaign Documents" v-model="document" />              
+              <input type="file" id="document" placeholder="Enter Campaign Documents"/>              
             </div>
           </div>
         </div>

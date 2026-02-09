@@ -489,7 +489,7 @@ const submitForm = async () => {
             </div>
             <div class="input">
               <label for="ongoing_units">Ongoing Units</label>
-              <input type="number" id="ongoing_units" placeholder="" v-model="ongoing_units" value="0">
+              <input type="number" id="ongoing_units" placeholder="" v-model="ongoing_units">
             </div>
           </div>
 
@@ -499,7 +499,7 @@ const submitForm = async () => {
             </div>
             <div class="input">
               <label for="available_units">Available Units</label>
-              <input type="number" id="available_units" placeholder="" v-model="available_units" value="0">
+              <input type="number" id="available_units" placeholder="" v-model="available_units">
             </div>
           </div>
         </div>

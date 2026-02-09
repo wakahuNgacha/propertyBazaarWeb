@@ -21,7 +21,7 @@ const submitForm = async () => {
       phone: phone.value,
       email: email.value,
       password: password.value,
-      role: 'agent',
+      role: 'broker',
     }
 
     await $fetch(`${config.public.apiBase}/users/create/`, {
@@ -29,9 +29,10 @@ const submitForm = async () => {
       body: payload,
     })
 
-    navigateTo('/properties')
+    navigateTo('/agent')
   } catch (err) {
     error.value = JSON.stringify(err.data) || 'Something went wrong'
+    console.log(err)
   } finally {
     loading.value = false
   }

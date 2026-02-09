@@ -1,6 +1,5 @@
 <script setup>
-
-const config = useRuntimeConfig()
+const { login } = useAuth()
 
 const phone = ref('')
 const email = ref('')
@@ -8,27 +7,28 @@ const password = ref('')
 
 const loading = ref(false)
 const error = ref('')
-
+const success = ref('')
 
 const submitForm = async () => {
   loading.value = true
   error.value = ''
+  success.value = ''
 
   try {
-    const payload = {
-      phone: phone.value,
-      email: email.value,
-      password: password.value,
+    const result = await login(phone.value, email.value, password.value)
+    
+    if (result.success) {
+      success.value = `Welcome, ${result.user?.first_name}!`
+      
+      // Small delay to show success message
+      setTimeout(() => {
+        navigateTo(result.redirectTo)
+      }, 500)
+    } else {
+      error.value = result.error || 'Login failed. Please try again.'
     }
-
-    await $fetch(`${config.public.apiBase}/users/create/`, {
-      method: 'POST',
-      body: payload,
-    })
-
-    navigateTo('/properties')
   } catch (err) {
-    error.value = JSON.stringify(err.data) || 'Something went wrong'
+    error.value = err.message || 'An unexpected error occurred'
   } finally {
     loading.value = false
   }
@@ -81,9 +81,14 @@ const submitForm = async () => {
                     </div>
 
 
+                    <div v-if="error" class="error-message">{{ error }}</div>
+                    <div v-if="success" class="success-message">{{ success }}</div>
+
                     <div class="buttons">
-                        <button class="primary" type="submit" >Sign up</button>  
-                        <button class="secondary" type="button">Cancel</button>        
+                        <button class="primary" type="submit" :disabled="loading">
+                            {{ loading ? 'Signing in...' : 'Sign in' }}
+                        </button>  
+                        <button class="secondary" type="button" @click="$router.back()">Cancel</button>        
                     </div>
 
                 </form>
@@ -117,5 +122,30 @@ const submitForm = async () => {
         height: 100%;
         object-fit: cover;
         border-radius: 5px;
+    }
+
+    .error-message {
+        color: #dc3545;
+        background-color: #f8d7da;
+        border: 1px solid #f5c6cb;
+        border-radius: 4px;
+        padding: 12px 16px;
+        margin-bottom: 16px;
+        font-size: 14px;
+    }
+
+    .success-message {
+        color: #155724;
+        background-color: #d4edda;
+        border: 1px solid #c3e6cb;
+        border-radius: 4px;
+        padding: 12px 16px;
+        margin-bottom: 16px;
+        font-size: 14px;
+    }
+
+    .buttons button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
     }
 </style>
