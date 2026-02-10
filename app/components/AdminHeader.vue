@@ -16,6 +16,7 @@
             <NuxtLink to="/admin/clients">clients</NuxtLink>
             <NuxtLink to="/admin/agents">agents</NuxtLink>
             <NuxtLink to="/admin/team">team</NuxtLink>
+            <NuxtLink to="/admin/core">Core</NuxtLink>
         </div>
         <div class="section">
             <NuxtLink to="/admin">

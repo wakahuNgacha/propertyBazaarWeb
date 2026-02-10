@@ -9,39 +9,56 @@ const { goBack } = usePreviousWindow()
 const title_number = ref('')
 const title = ref('')
 const description = ref('')
-const address = ref('')
-const county = ref('')
-const town = ref('')
-const location_pin = ref('')
-const local_area = ref('')
 const property_type = ref('')
 const property_use = ref('')
 const property_mode = ref('')
 const price = ref('')
 const negotiable = ref('')
 const property_status = ref('')
-const title_type = ref('')
 const title_status = ref('')
+const title_type = ref('')
+
+const address = ref('')
+const country = 'Kenya'
+const county = ref('')
+const town = ref('')
+const location_pin = ref('')
+const local_area = ref('')
+
+// Land
+
 const plot_size = ref('')
 const zoning_information = ref('')
 const soil_type = ref('')
 const topography = ref('')
+
+// House
+
 const build_up_area = ref('')
 const number_of_floors = ref('')
-const number_of_beds = ref('')
-const number_of_bathrooms = ref('')
+const bedrooms = ref('')
+const bathrooms = ref('')
 const parking_spaces = ref('')
 const year_build = ref('')
 const construction_status = ref('')
+
+//Projects
+
 const total_units = ref('')
 const ongoing_units = ref('')
 const available_units = ref('')
 const start_date = ref('')
 const expected_completion_date = ref('')
 const payment_plans_availability = ref(false)
+
+//Media
+
 const images = ref(null)
 const videos = ref(null)
 const documents = ref(null)
+
+//Features and Amenities
+
 const amenities = ref('')
 const features = ref('')
 
@@ -418,8 +435,8 @@ const submitForm = async () => {
               <img class="icon" src="/bed.png" alt="use">
             </div>
             <div class="input">
-              <label for="number_of_beds">Beds</label>
-              <input type="number" id="number_of_beds" placeholder="Number of Beds" v-model="number_of_beds" />                 
+              <label for="bedrooms">Beds</label>
+              <input type="number" id="bedrooms" placeholder="Number of Beds" v-model="bedrooms" />                 
             </div>
           </div>
         </div>
@@ -430,8 +447,8 @@ const submitForm = async () => {
               <img class="icon" src="/bath.png" alt="use">
             </div>
             <div class="input">
-              <label for="number_of_bathrooms">Bathrooms</label>
-              <input type="number" id="number_of_bathrooms" placeholder="Number of Bathrooms" v-model="number_of_bathrooms" />                 
+              <label for="bathrooms">Bathrooms</label>
+              <input type="number" id="bathrooms" placeholder="Number of Bathrooms" v-model="bathrooms" />                 
             </div>
           </div>
 
