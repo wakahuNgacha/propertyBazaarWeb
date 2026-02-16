@@ -1,7 +1,6 @@
 <script setup>
-import { useAuth } from '~/composables/useAuth'
-const config = useRuntimeConfig()
-const { getAccessToken } = useAuth()
+import { useAuthFetch } from '~/composables/useAuthFetch'
+const { fetchWithAuth } = useAuthFetch()
 
 const title = ref('')
 const location = ref('')
@@ -27,11 +26,9 @@ const submitForm = async () => {
       size: size.value,
     }
 
-    const token = getAccessToken()
-    await $fetch(`${config.public.apiBase}/properties/create/`, {
+    await fetchWithAuth('/properties/create/', {
         method: 'POST',
         body: payload,
-        headers: token ? { Authorization: `Bearer ${token}` } : {},
     })
 
     navigateTo('/properties')

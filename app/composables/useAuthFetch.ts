@@ -6,6 +6,13 @@ export const useAuthFetch = () => {
   const authStore = useAuthStore()
 
   const fetchWithAuth = async (endpoint: string, options: any = {}) => {
+
+    // console.log("Access token:", authStore.accessToken)
+
+    // if (!authStore.accessToken) {
+    //   throw new Error("No access token available")
+    // }
+
     const headers = {
       ...options.headers,
       'Authorization': `Bearer ${authStore.accessToken}`
@@ -17,6 +24,7 @@ export const useAuthFetch = () => {
         headers
       })
       return response
+      
     } catch (error: any) {
       // Handle 401 (token expired) by logging out
       if (error.status === 401) {

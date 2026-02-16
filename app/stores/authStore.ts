@@ -21,6 +21,9 @@ export const useAuthStore = defineStore('auth', {
   }),
 
   getters: {
+    isAuthenticated(): boolean {
+      return this.accessToken !== null && this.user !== null
+    },
     isAdmin(): boolean {
       return this.user?.role === 'admin'
     },
@@ -90,7 +93,7 @@ export const useAuthStore = defineStore('auth', {
         const stored = localStorage.getItem('authStore')
         if (stored) {
           try {
-            const { accessToken, refreshToken, user, isAuthenticated } = JSON.parse(stored)
+            const { accessToken, refreshToken, user } = JSON.parse(stored)
             this.accessToken = accessToken
             this.refreshToken = refreshToken
             this.user = user

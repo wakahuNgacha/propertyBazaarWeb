@@ -1,12 +1,11 @@
 <script setup>
-import { useAuth } from '~/composables/useAuth'
-const config = useRuntimeConfig()
-const { getAccessToken } = useAuth()
+import { useAuthFetch } from '~/composables/useAuthFetch'
 
 definePageMeta({
   layout: 'admin',
 })
 const { goBack } = usePreviousWindow()
+const { fetchWithAuth } = useAuthFetch()
 
 const name = ref('')
 const icon = ref('')
@@ -26,21 +25,15 @@ const submitForm = async () => {
       description: description.value,
     }
 
-    const token = getAccessToken()
-    if (!token) {
-      error.value = 'Authentication token not found. Please log in again.'
-      throw new Error('No auth token')
-    }
-    
-    await $fetch(`${config.public.apiBase}/amenities/create/`, {
+    await fetchWithAuth('/amenities/create/', {
       method: 'POST',
       body: payload,
-      headers: { Authorization: `Bearer ${token}` },
     })
 
     navigateTo('/admin/cores')
   } catch (err) {
-    error.value = JSON.stringify(err.data) || 'Something went wrong'
+    error.value = err.data?.message || JSON.stringify(err.data) || 'Something went wrong'
+    console.error('Create amenity error:', err)
   } finally {
     loading.value = false
   }

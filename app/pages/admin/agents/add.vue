@@ -1,7 +1,6 @@
 <script setup>
-import { useAuth } from '~/composables/useAuth'
-const config = useRuntimeConfig()
-const { getAccessToken } = useAuth()
+import { useAuthFetch } from '~/composables/useAuthFetch'
+const { fetchWithAuth } = useAuthFetch()
 
 definePageMeta({
   requiresAuth: true,
@@ -48,11 +47,9 @@ const submitForm = async () => {
       verified: verified.value,
     }
 
-    const token = getAccessToken()
-    await $fetch(`${config.public.apiBase}/brokers/create/`, {
+    await fetchWithAuth('/brokers/create/', {
       method: 'POST',
       body: payload,
-      headers: token ? { Authorization: `Bearer ${token}` } : {},
     })
 
     navigateTo('/admin/agents')

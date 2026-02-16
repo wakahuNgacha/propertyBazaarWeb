@@ -1,7 +1,6 @@
 <script setup>
-import { useAuth } from '~/composables/useAuth'
-const config = useRuntimeConfig()
-const { getAccessToken } = useAuth()
+import { useAuthFetch } from '~/composables/useAuthFetch'
+const { fetchWithAuth } = useAuthFetch()
 
 definePageMeta({
   layout: 'admin',
@@ -32,12 +31,10 @@ const submitForm = async () => {
       department: department.value,
     }
 
-    const token = getAccessToken()
-    await $fetch(`${config.public.apiBase}/team/create/`, {
-      method: 'POST',
-      body: payload,
-      headers: token ? { Authorization: `Bearer ${token}` } : {},
-    })
+      await fetchWithAuth('/team-members/create/', {
+        method: 'POST',
+        body: payload,
+      })
 
     navigateTo('/admin/team')
   } catch (err) {

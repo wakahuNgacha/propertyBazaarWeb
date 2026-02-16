@@ -1,7 +1,6 @@
 <script setup>
-import { useAuth } from '~/composables/useAuth'
-const config = useRuntimeConfig()
-const { getAccessToken } = useAuth()
+import { useAuthFetch } from '~/composables/useAuthFetch'
+const { fetchWithAuth } = useAuthFetch()
 
 definePageMeta({
   layout: 'admin',
@@ -24,11 +23,9 @@ const submitForm = async () => {
       description: description.value,
     }
 
-    const token = getAccessToken()
-    await $fetch(`${config.public.apiBase}/channels/create/`, {
+    await fetchWithAuth('/channels/create/', {
       method: 'POST',
       body: payload,
-      headers: token ? { Authorization: `Bearer ${token}` } : {},
     })
 
     navigateTo('/admin/media/channels')

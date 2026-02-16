@@ -1,7 +1,6 @@
 <script setup>
-import { useAuth } from '~/composables/useAuth'
-const config = useRuntimeConfig()
-const { getAccessToken } = useAuth()
+import { useAuthFetch } from '~/composables/useAuthFetch'
+const { fetchWithAuth } = useAuthFetch()
 
 definePageMeta({
   layout: 'admin',
@@ -39,11 +38,9 @@ const submitForm = async () => {
       channels: channels.value,
     }
 
-    const token = getAccessToken()
-    await $fetch(`${config.public.apiBase}/newsletters/create/`, {
+    await fetchWithAuth('/newsletters/create/', {
       method: 'POST',
       body: payload,
-      headers: token ? { Authorization: `Bearer ${token}` } : {},
     })
 
     navigateTo('/admin/media/newsletters')

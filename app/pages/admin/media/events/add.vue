@@ -1,7 +1,6 @@
 <script setup>
-import { useAuth } from '~/composables/useAuth'
-const config = useRuntimeConfig()
-const { getAccessToken } = useAuth()
+import { useAuthFetch } from '~/composables/useAuthFetch'
+const { fetchWithAuth } = useAuthFetch()
 
 definePageMeta({
   layout: 'admin',
@@ -32,11 +31,9 @@ const submitForm = async () => {
       attendees: attendees.value,
     }
 
-    const token = getAccessToken()
-    await $fetch(`${config.public.apiBase}/events/create/`, {
+    await fetchWithAuth('/events/create/', {
       method: 'POST',
       body: payload,
-      headers: token ? { Authorization: `Bearer ${token}` } : {},
     })
 
     navigateTo('/admin/media/events')

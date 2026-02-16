@@ -1,11 +1,9 @@
 <script setup>
-import { useAuth } from '~/composables/useAuth'
-const config = useRuntimeConfig()
-
+import { useAuthFetch } from '~/composables/useAuthFetch'
+const { fetchWithAuth } = useAuthFetch()
 definePageMeta({
   layout: 'admin',
 })
-const { getAccessToken } = useAuth()
 const { goBack } = usePreviousWindow()
 
 const name = ref('')
@@ -24,11 +22,9 @@ const submitForm = async () => {
       description: description.value,
     }
 
-    const token = getAccessToken()
-    await $fetch(`${config.public.apiBase}/property-uses/create/`, {
+    await fetchWithAuth('/property-uses/create/', {
       method: 'POST',
       body: payload,
-      headers: token ? { Authorization: `Bearer ${token}` } : {},
     })
 
     navigateTo('/admin/cores')
