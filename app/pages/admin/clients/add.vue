@@ -1,5 +1,7 @@
 <script setup>
+import { useAuth } from '~/composables/useAuth'
 const config = useRuntimeConfig()
+const { getAccessToken } = useAuth()
 
 definePageMeta({
   layout: 'admin',
@@ -62,9 +64,11 @@ const submitForm = async () => {
       notes: notes.value,
     }
 
+    const token = getAccessToken()
     await $fetch(`${config.public.apiBase}/clients/create/`, {
       method: 'POST',
       body: payload,
+      headers: token ? { Authorization: `Bearer ${token}` } : {},
     })
 
     navigateTo('/admin/clients')

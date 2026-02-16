@@ -26,8 +26,8 @@ const submitForm = async () => {
     }
 
     await $fetch(`${config.public.apiBase}/users/login/`, {
-      method: 'POST',
-      body: payload,
+        method: 'POST',
+        body: payload,
     })
 
     navigateTo('/properties')

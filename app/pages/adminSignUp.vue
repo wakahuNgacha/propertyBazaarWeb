@@ -25,8 +25,8 @@ const submitForm = async () => {
     }
 
     await $fetch(`${config.public.apiBase}/users/create/`, {
-      method: 'POST',
-      body: payload,
+        method: 'POST',
+        body: payload,
     })
 
     navigateTo('/admin')

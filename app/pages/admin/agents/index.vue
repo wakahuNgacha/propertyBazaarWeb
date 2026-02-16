@@ -1,6 +1,7 @@
 <script setup>
 definePageMeta({
-  layout: 'admin',
+    requiresAuth: true,
+    layout: 'admin',
 })
 const { goBack } = usePreviousWindow()
 </script>

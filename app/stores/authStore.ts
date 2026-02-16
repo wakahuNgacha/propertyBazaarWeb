@@ -11,7 +11,6 @@ export interface AuthState {
   accessToken: string | null
   refreshToken: string | null
   user: User | null
-  isAuthenticated: boolean
 }
 
 export const useAuthStore = defineStore('auth', {
@@ -19,7 +18,6 @@ export const useAuthStore = defineStore('auth', {
     accessToken: null,
     refreshToken: null,
     user: null,
-    isAuthenticated: false,
   }),
 
   getters: {
@@ -56,16 +54,18 @@ export const useAuthStore = defineStore('auth', {
       this.accessToken = accessToken
       this.refreshToken = refreshToken
       this.user = user
-      this.isAuthenticated = true
       
-      // Store in localStorage for persistence
-      if (import.meta.client) {
-        localStorage.setItem('authStore', JSON.stringify({
-          accessToken,
-          refreshToken,
-          user,
-          isAuthenticated: true
-        }))
+      // Store in localStorage for persistence (client-side only)
+      if (typeof window !== 'undefined') {
+        try {
+          localStorage.setItem('authStore', JSON.stringify({
+            accessToken,
+            refreshToken,
+            user,
+          }))
+        } catch (error) {
+          console.error('Failed to store auth state', error)
+        }
       }
     },
 
@@ -73,17 +73,20 @@ export const useAuthStore = defineStore('auth', {
       this.accessToken = null
       this.refreshToken = null
       this.user = null
-      this.isAuthenticated = false
       
-      // Clear from localStorage
-      if (import.meta.client) {
-        localStorage.removeItem('authStore')
+      // Clear from localStorage (client-side only)
+      if (typeof window !== 'undefined') {
+        try {
+          localStorage.removeItem('authStore')
+        } catch (error) {
+          console.error('Failed to clear auth state', error)
+        }
       }
     },
 
     // Restore auth state from localStorage on app load
     restoreAuth() {
-      if (import.meta.client) {
+      if (typeof window !== 'undefined') {
         const stored = localStorage.getItem('authStore')
         if (stored) {
           try {
@@ -91,7 +94,6 @@ export const useAuthStore = defineStore('auth', {
             this.accessToken = accessToken
             this.refreshToken = refreshToken
             this.user = user
-            this.isAuthenticated = isAuthenticated
           } catch (error) {
             console.error('Failed to restore auth state', error)
             this.clearAuth()

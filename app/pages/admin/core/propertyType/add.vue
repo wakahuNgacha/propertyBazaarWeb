@@ -1,5 +1,7 @@
 <script setup>
+import { useAuth } from '~/composables/useAuth'
 const config = useRuntimeConfig()
+const { getAccessToken } = useAuth()
 
 definePageMeta({
   layout: 'admin',
@@ -22,12 +24,14 @@ const submitForm = async () => {
       description: description.value,
     }
 
-    await $fetch(`${config.public.apiBase}/channels/create/`, {
+    const token = getAccessToken()
+    await $fetch(`${config.public.apiBase}/property_types/create/`, {
       method: 'POST',
       body: payload,
+      headers: token ? { Authorization: `Bearer ${token}` } : {},
     })
 
-    navigateTo('/admin/media/channels')
+    navigateTo('/admin/cores')
   } catch (err) {
     error.value = JSON.stringify(err.data) || 'Something went wrong'
   } finally {
@@ -49,7 +53,7 @@ const submitForm = async () => {
       </div>
     </div>
     <div class="form">
-      <h2>Add New Channel</h2>
+      <h2>Add New Property Type</h2>
       <form @submit.prevent="submitForm">
         <div class="form_group">
           <div class="form_holder">
@@ -74,7 +78,7 @@ const submitForm = async () => {
         </div>
 
         <div class="buttons">
-          <button class="primary" type="submit">Add Channel</button>  
+          <button class="primary" type="submit">Add Property Type</button>  
           <button class="secondary" type="button">Cancel</button>        
         </div>
 

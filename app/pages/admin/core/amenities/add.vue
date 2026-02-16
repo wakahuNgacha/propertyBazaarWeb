@@ -1,5 +1,7 @@
 <script setup>
+import { useAuth } from '~/composables/useAuth'
 const config = useRuntimeConfig()
+const { getAccessToken } = useAuth()
 
 definePageMeta({
   layout: 'admin',
@@ -20,13 +22,20 @@ const submitForm = async () => {
   try {
     const payload = {
       name: name.value,
-      icon: name.icon,
+      icon: icon.value,
       description: description.value,
     }
 
+    const token = getAccessToken()
+    if (!token) {
+      error.value = 'Authentication token not found. Please log in again.'
+      throw new Error('No auth token')
+    }
+    
     await $fetch(`${config.public.apiBase}/amenities/create/`, {
       method: 'POST',
       body: payload,
+      headers: { Authorization: `Bearer ${token}` },
     })
 
     navigateTo('/admin/cores')

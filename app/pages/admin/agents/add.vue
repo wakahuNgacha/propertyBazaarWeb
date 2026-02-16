@@ -1,7 +1,10 @@
 <script setup>
+import { useAuth } from '~/composables/useAuth'
 const config = useRuntimeConfig()
+const { getAccessToken } = useAuth()
 
 definePageMeta({
+  requiresAuth: true,
   layout: 'admin',
 })
 const { goBack } = usePreviousWindow()
@@ -45,9 +48,11 @@ const submitForm = async () => {
       verified: verified.value,
     }
 
+    const token = getAccessToken()
     await $fetch(`${config.public.apiBase}/brokers/create/`, {
       method: 'POST',
       body: payload,
+      headers: token ? { Authorization: `Bearer ${token}` } : {},
     })
 
     navigateTo('/admin/agents')
