@@ -8,25 +8,31 @@ definePageMeta({
 const { goBack } = usePreviousWindow()
 
 const name = ref('')
-const icon = ref('')
+const icon = ref(null)
 const description = ref('')
 
 const loading = ref(false)
 const error = ref('')
+
+const handleIconChange = (event) => {
+  icon.value = event.target.files?.[0] || null
+}
 
 const submitForm = async () => {
   loading.value = true
   error.value = ''
 
   try {
-    const payload = {
-      name: name.value,
-      description: description.value,
+    const formData = new FormData()
+    formData.append('name', name.value)
+    if (icon.value) {
+      formData.append('icon', icon.value)
     }
+    formData.append('description', description.value)
 
     await fetchWithAuth('/features/create/', {
       method: 'POST',
-      body: payload,
+      body: formData,
     })
 
     navigateTo('/admin/media/channels')
@@ -70,7 +76,7 @@ const submitForm = async () => {
             </div>
             <div class="input">
               <label for="icon"> Icon</label>            
-              <input type="file" id="icon" placeholder="Enter Channel Name" />               
+              <input type="file" id="icon" @change="handleIconChange" accept="image/*" />               
             </div>
           </div>
 

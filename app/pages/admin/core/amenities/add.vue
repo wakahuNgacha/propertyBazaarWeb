@@ -8,32 +8,44 @@ const { goBack } = usePreviousWindow()
 const { fetchWithAuth } = useAuthFetch()
 
 const name = ref('')
-const icon = ref('')
+const icon = ref(null)
 const description = ref('')
 
 const loading = ref(false)
 const error = ref('')
+
+const handleIconChange = (event) => {
+  icon.value = event.target.files?.[0] || null
+}
 
 const submitForm = async () => {
   loading.value = true
   error.value = ''
 
   try {
-    const payload = {
-      name: name.value,
-      icon: icon.value,
-      description: description.value,
+    const formData = new FormData()
+    formData.append('name', name.value)
+    if (icon.value) {
+      formData.append('icon', icon.value)
     }
+    formData.append('description', description.value)
+
+    alert('Submitting form with data: ' + JSON.stringify({
+      name: name.value,
+      description: description.value,
+      icon: icon.value ? icon.value.name : null,
+    }))
 
     await fetchWithAuth('/amenities/create/', {
       method: 'POST',
-      body: payload,
+      body: formData,
     })
 
-    navigateTo('/admin/cores')
+    navigateTo('/admin/core')
   } catch (err) {
     error.value = err.data?.message || JSON.stringify(err.data) || 'Something went wrong'
     console.error('Create amenity error:', err)
+    alert(err)
   } finally {
     loading.value = false
   }
@@ -72,7 +84,7 @@ const submitForm = async () => {
             </div>
             <div class="input">
               <label for="icon"> Icon</label>            
-              <input type="file" id="icon" placeholder="Enter Channel Name" />               
+              <input type="file" id="icon" @change="handleIconChange" accept="image/*" />               
             </div>
           </div>
 

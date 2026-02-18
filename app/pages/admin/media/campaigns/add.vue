@@ -21,26 +21,32 @@ const channels = ref('')
 const loading = ref(false)
 const error = ref('')
 
+const handleDocumentChange = (event) => {
+  document.value = event.target.files?.[0] || null
+}
+
 const submitForm = async () => {
   loading.value = true
   error.value = ''
 
   try {
-    const payload = {
-      name: name.value,
-      objective: objective.value,
-      status: status.value,
-      type: type.value,
-      start_date: startDate.value,
-      end_date: endDate.value,
-      related_property: relatedProperty.value,
-      budget_estimate: budgetEstimate.value,
-      channels: channels.value,
+    const formData = new FormData()
+    formData.append('name', name.value)
+    formData.append('objective', objective.value)
+    formData.append('status', status.value)
+    formData.append('type', type.value)
+    formData.append('start_date', startDate.value)
+    formData.append('end_date', endDate.value)
+    formData.append('related_property', relatedProperty.value)
+    formData.append('budget_estimate', budgetEstimate.value)
+    if (document.value) {
+      formData.append('document', document.value)
     }
+    formData.append('channels', channels.value)
 
     await fetchWithAuth('/campaigns/create/', {
       method: 'POST',
-      body: payload,
+      body: formData,
     })
 
     navigateTo('/admin/media/campaigns')
@@ -175,7 +181,7 @@ const submitForm = async () => {
             </div>
             <div class="input">
               <label for="document">Documents</label>            
-              <input type="file" id="document" placeholder="Enter Campaign Documents"/>              
+              <input type="file" id="document" @change="handleDocumentChange" />              
             </div>
           </div>
         </div>

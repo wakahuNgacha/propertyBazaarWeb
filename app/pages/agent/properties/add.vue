@@ -53,50 +53,61 @@ const submitForm = async () => {
   error.value = ''
 
   try {
-    const payload = {
-      title_number: title_number.value,
-      title: title.value,
-      description: description.value,
-      address: address.value,
-      county: county.value,
-      town: town.value,
-      location_pin: location_pin.value,
-      local_area: local_area.value,
-      property_type: property_type.value,
-      property_use: property_use.value,
-      property_mode: property_mode.value,
-      price: price.value,
-      negotiable: negotiable.value,
-      property_status: property_status.value,
-      title_type: title_type.value,
-      title_status: title_status.value,
-      plot_size: plot_size.value,
-      zoning_information: zoning_information.value,
-      soil_type: soil_type.value,
-      topography: topography.value,
-      build_up_area: build_up_area.value,
-      number_of_floors: number_of_floors.value,
-      number_of_beds: number_of_beds.value,
-      number_of_bathrooms: number_of_bathrooms.value,
-      parking_spaces: parking_spaces.value,
-      year_build: year_build.value,
-      construction_status: construction_status.value,
-      total_units: total_units.value,
-      ongoing_units: ongoing_units.value,
-      available_units: available_units.value,
-      start_date: start_date.value,
-      expected_completion_date: expected_completion_date.value,
-      payment_plans_availability: payment_plans_availability.value,
-      images: images.value,
-      videos: videos.value,
-      documents: documents.value,
-      amenities: amenities.value,
-      features: features.value,
+    const formData = new FormData()
+    formData.append('title_number', title_number.value)
+    formData.append('title', title.value)
+    formData.append('description', description.value)
+    formData.append('address', address.value)
+    formData.append('county', county.value)
+    formData.append('town', town.value)
+    formData.append('location_pin', location_pin.value)
+    formData.append('local_area', local_area.value)
+    formData.append('property_type', property_type.value)
+    formData.append('property_use', property_use.value)
+    formData.append('property_mode', property_mode.value)
+    formData.append('price', price.value)
+    formData.append('negotiable', negotiable.value)
+    formData.append('property_status', property_status.value)
+    formData.append('title_type', title_type.value)
+    formData.append('title_status', title_status.value)
+    formData.append('plot_size', plot_size.value)
+    formData.append('zoning_information', zoning_information.value)
+    formData.append('soil_type', soil_type.value)
+    formData.append('topography', topography.value)
+    formData.append('build_up_area', build_up_area.value)
+    formData.append('number_of_floors', number_of_floors.value)
+    formData.append('number_of_beds', number_of_beds.value)
+    formData.append('number_of_bathrooms', number_of_bathrooms.value)
+    formData.append('parking_spaces', parking_spaces.value)
+    formData.append('year_build', year_build.value)
+    formData.append('construction_status', construction_status.value)
+    formData.append('total_units', total_units.value)
+    formData.append('ongoing_units', ongoing_units.value)
+    formData.append('available_units', available_units.value)
+    formData.append('start_date', start_date.value)
+    formData.append('expected_completion_date', expected_completion_date.value)
+    formData.append('payment_plans_availability', payment_plans_availability.value)
+    if (images.value) {
+      for (let file of images.value) {
+        formData.append('images', file)
+      }
     }
+    if (videos.value) {
+      for (let file of videos.value) {
+        formData.append('videos', file)
+      }
+    }
+    if (documents.value) {
+      for (let file of documents.value) {
+        formData.append('documents', file)
+      }
+    }
+    formData.append('amenities', amenities.value)
+    formData.append('features', features.value)
 
     await fetchWithAuth('/properties/create/', {
       method: 'POST',
-      body: payload,
+      body: formData,
     })
 
     navigateTo('/agent')
