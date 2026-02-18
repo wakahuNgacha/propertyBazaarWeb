@@ -28,7 +28,7 @@ const submitForm = async () => {
       body: payload,
     })
 
-    navigateTo('/admin/cores')
+    navigateTo('/admin/core')
   } catch (err) {
     error.value = JSON.stringify(err.data) || 'Something went wrong'
   } finally {

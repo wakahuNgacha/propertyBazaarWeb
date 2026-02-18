@@ -7,11 +7,7 @@ export const useAuthFetch = () => {
 
   const fetchWithAuth = async (endpoint: string, options: any = {}) => {
 
-    // console.log("Access token:", authStore.accessToken)
 
-    // if (!authStore.accessToken) {
-    //   throw new Error("No access token available")
-    // }
 
     const headers = {
       ...options.headers,

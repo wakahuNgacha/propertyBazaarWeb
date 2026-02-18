@@ -23,12 +23,12 @@ const submitForm = async () => {
       description: description.value,
     }
 
-    await fetchWithAuth('/channels/create/', {
+    await fetchWithAuth('/relationship-statuses/create/', {
       method: 'POST',
       body: payload,
     })
 
-    navigateTo('/admin/media/channels')
+    navigateTo('/admin/core')
   } catch (err) {
     error.value = JSON.stringify(err.data) || 'Something went wrong'
   } finally {
@@ -50,7 +50,7 @@ const submitForm = async () => {
       </div>
     </div>
     <div class="form">
-      <h2>Add New Channel</h2>
+      <h2>Add New Relationship Status</h2>
       <form @submit.prevent="submitForm">
         <div class="form_group">
           <div class="form_holder">
@@ -59,7 +59,7 @@ const submitForm = async () => {
             </div>
             <div class="input">
               <label for="name"> Name</label>            
-              <input type="text" id="name" placeholder="Enter Channel Name" v-model="name" />               
+              <input type="text" id="name" placeholder="Enter Relationship Status Name" v-model="name" />               
             </div>
           </div>
 
@@ -75,7 +75,7 @@ const submitForm = async () => {
         </div>
 
         <div class="buttons">
-          <button class="primary" type="submit">Add Channel</button>  
+          <button class="primary" type="submit">Add Relationship Status</button>  
           <button class="secondary" type="button">Cancel</button>        
         </div>
 

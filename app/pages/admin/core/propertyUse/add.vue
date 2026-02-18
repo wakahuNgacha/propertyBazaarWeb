@@ -27,7 +27,7 @@ const submitForm = async () => {
       body: payload,
     })
 
-    navigateTo('/admin/cores')
+    navigateTo('/admin/core')
   } catch (err) {
     error.value = JSON.stringify(err.data) || 'Something went wrong'
   } finally {
@@ -49,7 +49,7 @@ const submitForm = async () => {
       </div>
     </div>
     <div class="form">
-      <h2>Add New Channel</h2>
+      <h2>Add New Property Use</h2>
       <form @submit.prevent="submitForm">
         <div class="form_group">
           <div class="form_holder">
@@ -58,7 +58,7 @@ const submitForm = async () => {
             </div>
             <div class="input">
               <label for="name"> Name</label>            
-              <input type="text" id="name" placeholder="Enter Channel Name" v-model="name" />               
+              <input type="text" id="name" placeholder="Enter Property Use Name" v-model="name" />               
             </div>
           </div>
 
