@@ -18,6 +18,8 @@ const topographyTypes = ref([])
 const constructionStatuses = ref([])
 const titleTypes = ref([])
 const titleStatuses = ref([])
+const amenitiesList = ref([])
+const featuresList = ref([])
 
 onMounted(async () => {
   propertyTypes.value = await $fetch('/api/property-types/property-types')
@@ -29,9 +31,11 @@ onMounted(async () => {
   topographyTypes.value = await $fetch('/api/topography-types/topography-types')
   constructionStatuses.value = await $fetch('/api/construction-status/construction-status')
   titleTypes.value = await $fetch('/api/title-types/title-types')
+  amenitiesList.value = await $fetch('/api/amenities/amenities')
+  featuresList.value = await $fetch('/api/features/features')
   titleStatuses.value = await $fetch('/api/title-status/title-status')
 
-})
+})  
 
 const title_number = ref('')
 const title = ref('')
@@ -85,9 +89,28 @@ const videos = ref(null)
 const documents = ref(null)
 
 //Features and Amenities
+const amenities = ref([])
+const handleAmenityToggle = (payload) => {
+  if (payload.checked) {
+    if (!amenities.value.includes(payload)) {
+      amenities.value.push(payload)
+    }
+  } else {
+    amenities.value = amenities.value.filter(id => id !== payload)
+  }
+}
 
-const amenities = ref('')
-const features = ref('')
+
+const features = ref([])
+const handleFeatureToggle = (payload) => {
+  if (payload.checked) {
+    if (!features.value.includes(payload)) {
+      features.value.push(payload)
+    }
+  } else {
+    features.value = features.value.filter(id => id !== payload)
+  }
+}
 
 const loading = ref(false)
 const error = ref('')
@@ -276,16 +299,25 @@ const submitForm = async () => {
     }
 
     if (features.value?.length) {
-      for (const featureId of features.value) {
+      for (const feature of features.value.filter(f => f.checked)) {
+
+        const featureData = new FormData()
+        featureData.append('feature', feature.id)
+        featureData.append('count', feature.count || 1)
+
         try {
-          await fetchWithAuth(`/properties/${propertyRes.id}/features/add/`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ feature_id: featureId }),
-          })
+          const featureRes = await fetchWithAuth(
+            `/properties/${propertyRes.id}/features/add/`,
+            {
+              method: 'POST',
+              body: featureData,
+            }
+          )
+
+          console.log('Feature added:', featureRes)
+
         } catch (err) {
-          console.error('Error adding feature:', err, featureId)
-          error.value = 'Failed to add one or more features'
+          console.error('Error adding feature:', err)
           return
         }
       }
@@ -293,12 +325,21 @@ const submitForm = async () => {
 
     if (amenities.value?.length) {
       for (const amenityId of amenities.value) {
+        const amenityData = new FormData()
+        amenityData.append('amenity', amenityId.id)
+        console.log('---- AMENITY DATA ----')
+
+        amenityData.forEach((value, key) => {
+          console.log(`${key}:`, value)
+        })
+
+        console.log('-----------------------')
         try {
-          await fetchWithAuth(`/properties/${propertyRes.id}/amenities/add/`, {
+          const amenityRes = await fetchWithAuth(`/properties/${propertyRes.id}/amenities/add/`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ amenity_id: amenityId }),
+            body: amenityData,
           })
+          console.log('Amenity added:', amenityRes)
         } catch (err) {
           console.error('Error adding amenity:', err, amenityId)
           error.value = 'Failed to add one or more amenities'
@@ -307,7 +348,7 @@ const submitForm = async () => {
       }
     }
 
-    navigateTo('/agent')
+    navigateTo('/agent/properties')
 
   } catch (err) {
     console.error('Unexpected error in submitForm:', err)
@@ -316,6 +357,7 @@ const submitForm = async () => {
     loading.value = false
   }
 }
+
 
 </script>
 
@@ -800,10 +842,22 @@ const submitForm = async () => {
               <img class="icon" src="/church.png" alt="amenities">
             </div>
             <div class="input">
-              <label for="amenities">Add Amenities</label>            
-              <input type="text" id="amenities" placeholder="Enter Amenities" v-model="amenities" />               
+              <label for="amenities">Add Amenities</label>
+              <div class="featureList">
+                <div class="feature" v-for="amenity in amenities" :key="amenity.id">
+                  <p>{{ amenity.name }}</p>
+                </div>                
+              </div>
             </div>
-          </div>
+          </div>  
+        </div>
+        <div class="form_group">
+          <AmenitiesComponent
+            v-for="value in amenitiesList"
+            :key="value.id"
+            :amenity="value"
+            @toggle="handleAmenityToggle"
+          />
         </div>
 
         <h3>Features</h3>
@@ -813,11 +867,22 @@ const submitForm = async () => {
               <img class="icon" src="/bath.png" alt="features">
             </div>
             <div class="input">
-              <label for="features">Add Features</label>            
-              <input type="text" id="features" placeholder="Enter Features" v-model="features" />               
+              <label for="features">Add Features</label>
+              <div class="featureList">
+                <div class="feature" v-for="feature in features" :key="feature.id">
+                  <p>{{ feature.count }}</p> 
+                  <p>{{ feature.name }}</p>
+                </div>                
+              </div>
+          
             </div>
           </div>
         </div>
+
+        <div class="form_group">
+          <FeaturesComponent v-for="value in featuresList" :key="value.id" :feature="value" @toggle="handleFeatureToggle"/>          
+        </div>
+
 
         <h3>Media</h3>
         <div class="form_group">
@@ -898,5 +963,24 @@ const submitForm = async () => {
       gap: 20px;
       align-items: center;
       height: 100%;
+  }
+  .featureList{
+    display: flex;
+    flex-direction: row;
+    height: 60%;
+    gap: 10px;
+    flex-wrap: wrap;
+    /* margin-top: 10px; */
+  }
+  .feature{
+    height: 100%;
+    background-color: var(--input-bg);
+    /* padding: 5px 10px; */
+    border-radius: 5px;
+    display: flex;
+    gap: 5px;
+    border: 1px solid var(--input-border);
+    padding-left: 5px;
+    padding-right: 5px;
   }
 </style>

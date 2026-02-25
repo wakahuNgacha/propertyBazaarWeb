@@ -35,7 +35,7 @@ const submitForm = async () => {
       body: formData,
     })
 
-    navigateTo('/admin/media/channels')
+    navigateTo('/admin/core')
   } catch (err) {
     error.value = JSON.stringify(err.data) || 'Something went wrong'
   } finally {
@@ -96,7 +96,7 @@ const submitForm = async () => {
         </div>
 
         <div class="buttons">
-          <button class="primary" type="submit">Add Channel</button>  
+          <button class="primary" type="submit">Add Feature</button>  
           <button class="secondary" type="button">Cancel</button>        
         </div>
 
