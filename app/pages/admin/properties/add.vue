@@ -122,7 +122,6 @@ watch(property_mode, (newValue) => {
 })
 
 watch(property_type, (newValue) => {
-  console.log('Property type changed to:', newValue.name)
   if (newValue.name === 'land') {
     land.value = true
     house.value = false
@@ -157,8 +156,7 @@ const submitForm = async () => {
       propertyRes = await fetchWithAuth('/properties/create/', {
         method: 'POST',
         body: propertyData,
-      })
-    console.log('Created property with ID:', propertyRes)    
+      })  
     } catch (err) {
       console.error('Error creating property:', err)
       error.value = 'Failed to create property'
@@ -298,36 +296,46 @@ const submitForm = async () => {
       }
     }
 
-    if (features.value?.length) {
-      for (const featureId of features) {
-        const featureData = new FormData()
-        featureData.append('feature_id', featureId.id)
-        featureData.append('count', featureId.count)
+    if (amenities.value?.length) {
+      for (const amenityId of amenities.value) {
+        const amenityData = new FormData()
+        amenityData.append('property', propertyRes.id)
+        amenityData.append('amenity', amenityId.id)
+
         try {
-          await fetchWithAuth(`/properties/${propertyRes.id}/features/add/`, {
+          const amenityRes = await fetchWithAuth(`/properties/${propertyRes.id}/amenities/add/`, {
             method: 'POST',
-            body: featureData,
+            body: amenityData,
           })
+
         } catch (err) {
-          console.error('Error adding feature:', err, featureId)
-          error.value = 'Failed to add one or more features'
+          console.error('Error adding amenity:', err, amenityId)
+          error.value = 'Failed to add one or more amenities'
           return
         }
       }
     }
 
-    if (amenities.value?.length) {
-      for (const amenityId of amenities) {
-        const amenityData = new FormData()
-        amenityData.append('amenity_id', amenityId)
+
+    if (features.value?.length) {
+      for (const feature of features.value.filter(f => f.checked)) {
+
+        const featureData = new FormData()
+        featureData.append('property', propertyRes.id)
+        featureData.append('feature', feature.id)
+        featureData.append('count', feature.count || 1)
+
         try {
-          await fetchWithAuth(`/properties/${propertyRes.id}/amenities/add/`, {
-            method: 'POST',
-            body: amenityData,
-          })
+          const featureRes = await fetchWithAuth(
+            `/properties/${propertyRes.id}/features/add/`,
+            {
+              method: 'POST',
+              body: featureData,
+            }
+          )
+
         } catch (err) {
-          console.error('Error adding amenity:', err, amenityId)
-          error.value = 'Failed to add one or more amenities'
+          console.error('Error adding feature:', err)
           return
         }
       }

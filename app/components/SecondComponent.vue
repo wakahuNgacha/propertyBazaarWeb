@@ -1,15 +1,18 @@
 <script setup>
+const properties = ref([])
 
+onMounted(async () =>{
+    properties.value = await $fetch('/api/properties/properties')
+})
 </script>
 
 <template>
     <div class="full">
         <h1>Featured Properties</h1>
         <p>We collaborate with the best agents and developers to help you get the best.</p>
-
         <div class="property_row">
-            <div class="property_holder" v-for="i in 3">
-                <PropertyComponent/>                
+            <div class="property_holder" v-for="property in properties.slice(0, 3)" :key="property.id">
+                <PropertyComponent :property="property"/>                
             </div>
 
         </div>

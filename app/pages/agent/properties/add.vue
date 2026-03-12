@@ -122,7 +122,6 @@ watch(property_mode, (newValue) => {
 })
 
 watch(property_type, (newValue) => {
-  console.log('Property type changed to:', newValue.name)
   if (newValue.name === 'land') {
     land.value = true
     house.value = false
@@ -157,8 +156,7 @@ const submitForm = async () => {
       propertyRes = await fetchWithAuth('/properties/create/', {
         method: 'POST',
         body: propertyData,
-      })
-    console.log('Created property with ID:', propertyRes)    
+      }) 
     } catch (err) {
       console.error('Error creating property:', err)
       error.value = 'Failed to create property'
@@ -298,10 +296,32 @@ const submitForm = async () => {
       }
     }
 
+    if (amenities.value?.length) {
+      for (const amenityId of amenities.value) {
+        const amenityData = new FormData()
+        amenityData.append('property', propertyRes.id)
+        amenityData.append('amenity', amenityId.id)
+
+        try {
+          const amenityRes = await fetchWithAuth(`/properties/${propertyRes.id}/amenities/add/`, {
+            method: 'POST',
+            body: amenityData,
+          })
+
+        } catch (err) {
+          console.error('Error adding amenity:', err, amenityId)
+          error.value = 'Failed to add one or more amenities'
+          return
+        }
+      }
+    }
+
+
     if (features.value?.length) {
       for (const feature of features.value.filter(f => f.checked)) {
 
         const featureData = new FormData()
+        featureData.append('property', propertyRes.id)
         featureData.append('feature', feature.id)
         featureData.append('count', feature.count || 1)
 
@@ -314,8 +334,6 @@ const submitForm = async () => {
             }
           )
 
-          console.log('Feature added:', featureRes)
-
         } catch (err) {
           console.error('Error adding feature:', err)
           return
@@ -323,30 +341,6 @@ const submitForm = async () => {
       }
     }
 
-    if (amenities.value?.length) {
-      for (const amenityId of amenities.value) {
-        const amenityData = new FormData()
-        amenityData.append('amenity', amenityId.id)
-        console.log('---- AMENITY DATA ----')
-
-        amenityData.forEach((value, key) => {
-          console.log(`${key}:`, value)
-        })
-
-        console.log('-----------------------')
-        try {
-          const amenityRes = await fetchWithAuth(`/properties/${propertyRes.id}/amenities/add/`, {
-            method: 'POST',
-            body: amenityData,
-          })
-          console.log('Amenity added:', amenityRes)
-        } catch (err) {
-          console.error('Error adding amenity:', err, amenityId)
-          error.value = 'Failed to add one or more amenities'
-          return
-        }
-      }
-    }
 
     navigateTo('/agent/properties')
 

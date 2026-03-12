@@ -8,9 +8,17 @@ export default defineNuxtRouteMiddleware((to, from) => {
     '/agentSignUp',
     '/partnerSignUp',
     '/getStarted',
-    '/',
+    '/properties',
+    '/properties/',
+    '/'
   ]
 
+  if (
+    publicRoutes.includes(to.path) ||
+    to.path.startsWith('/properties/')
+  ) {
+    return
+  }
   // Check if current route is public
   if (publicRoutes.includes(to.path)) {
     return

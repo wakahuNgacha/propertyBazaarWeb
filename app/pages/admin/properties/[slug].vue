@@ -2,7 +2,19 @@
 definePageMeta({
   layout: 'admin',
 })
+
 const { goBack } = usePreviousWindow()
+const getProperty = async () => {
+  try {
+    property.value = await $fetch(`${config.public.apiBase}/properties/${route.params.slug}/`)
+  } catch (error) {
+    console.error("Failed to fetch property:", error)
+  }
+}
+
+onMounted(() => {
+  getProperty()
+})
 </script>
 
 <template>
@@ -36,13 +48,13 @@ const { goBack } = usePreviousWindow()
                 </div>
                 <div class="property_description">
                     <div class="title">
-                        <h2>Luxury Family Home</h2>
+                        <h2>{{ property?.title }}</h2>
                     </div>
                     <div class="location">
-                        <p>Nairobi, Kenya</p>
+                        <p v-if="property?.location">{{ property.location?.county }} {{ property.location?.town }} {{ property.location?.local_area}}</p>
                     </div>
                     <div class="price">
-                        <h3>$500,000</h3>
+                        <h3>KSH {{ property?.price }}</h3>
                     </div>
                     <div class="features">
                         <div class="icon_holder feature" v-for="i in 5">
@@ -52,9 +64,7 @@ const { goBack } = usePreviousWindow()
                     </div>
                     <div class="details">
                         <h3>Property details</h3>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad beatae, unde ab tempora mollitia sequi tempore consequuntur saepe, officia quidem, incidunt ipsam voluptate quos hic. Incidunt nostrum velit ea! Laboriosam.</p>
-
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad beatae, unde ab tempora mollitia sequi tempore consequuntur saepe, officia quidem, incidunt ipsam voluptate quos hic. Incidunt nostrum velit ea! Laboriosam.</p>
+                        <p>{{ property?.description }}</p>
                     </div>
                 </div>
 
@@ -69,16 +79,6 @@ const { goBack } = usePreviousWindow()
                     <h3>Interior Details</h3>
                     <div class="more_details">
                         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad beatae, unde ab tempora mollitia sequi tempore consequuntur saepe, officia quidem, incidunt ipsam voluptate quos hic. Incidunt nostrum velit ea! Laboriosam.</p>
-                    </div>
-                </div>
-
-                <div class="properties">
-                    <h3>Similar Properties</h3>
-                    <p>Similar properties that compare in price, location, and features to this property</p>
-                    <div class="property_list">
-                        <div class="property_holder" v-for="i in 3">
-                            <PropertyComponent/>                
-                        </div>
                     </div>
                 </div>
 

@@ -2,6 +2,12 @@
 definePageMeta({
   layout: 'admin',
 })
+
+const properties = ref([])
+
+onMounted(async () =>{
+    properties.value = await $fetch('/api/properties/properties')
+})
 </script>
 
 <template>
@@ -69,8 +75,8 @@ definePageMeta({
         </div>
 
         <div class="property_row">
-            <div class="property_holder" v-for="i in 10">
-                <AdminProperty/>            
+            <div class="property_holder" v-for="property in properties">
+                <AdminProperty :property="property"/>            
             </div>
 
         </div>        

@@ -1,5 +1,9 @@
 <script setup>
+const properties = ref([])
 
+onMounted(async () =>{
+    properties.value = await $fetch('/api/properties/properties')
+})
 </script>
 
 <template>
@@ -59,8 +63,8 @@
         </div>
 
         <div class="property_row">
-            <div class="property_holder" v-for="i in 10">
-                <PropertyComponent/>            
+            <div class="property_holder" v-for="property in properties">
+                <PropertyComponent :property="property"/>            
             </div>
 
         </div>        

@@ -1,15 +1,17 @@
 <script setup>
-
+const props = defineProps({
+    property: Object
+})
 </script>
 
 <template>
-    <NuxtLink to="/admin/properties/1" class="property">
+    <NuxtLink :to="`/admin/properties/${property?.slug}`" class="property">
         <div class="image">
             <img src="/pexels-heyho-7031607.jpg" alt="">
         </div>
         <div class="text">
             <div class="price">
-                <p>KSH 30000000</p>
+                <p>{{ property?.price }}</p>
 
                 <div class="icon_holder">
                     <img class="icon" src="/heart.png" alt="">
@@ -17,12 +19,12 @@
             </div>
 
             <div class="heading">
-                <p>Big mansion for sale</p>
+                <p>{{ property?.title }}</p>
             </div>
 
             <div class="icon_holder location">
                 <img class="icon" src="/location.png" alt="">
-                <p>County, town</p>
+                <p>{{ property?.location?.county }} {{ property.location?.town }} {{ property.location?.local_area}}</p>
             </div>
         </div>
         
